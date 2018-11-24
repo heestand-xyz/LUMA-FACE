@@ -1,0 +1,358 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		74DB096421A8DD5E00DC061A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74DB096321A8DD5E00DC061A /* AppDelegate.swift */; };
+		74DB096621A8DD5E00DC061A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74DB096521A8DD5E00DC061A /* ViewController.swift */; };
+		74DB096921A8DD5E00DC061A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 74DB096721A8DD5E00DC061A /* Main.storyboard */; };
+		74DB096C21A8DD5E00DC061A /* Luma_Face.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 74DB096A21A8DD5E00DC061A /* Luma_Face.xcdatamodeld */; };
+		74DB096E21A8DD5F00DC061A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 74DB096D21A8DD5F00DC061A /* Assets.xcassets */; };
+		74DB097121A8DD5F00DC061A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 74DB096F21A8DD5F00DC061A /* LaunchScreen.storyboard */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		74DB096021A8DD5E00DC061A /* Luma Face.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Luma Face.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		74DB096321A8DD5E00DC061A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		74DB096521A8DD5E00DC061A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		74DB096821A8DD5E00DC061A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		74DB096B21A8DD5E00DC061A /* Luma_Face.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Luma_Face.xcdatamodel; sourceTree = "<group>"; };
+		74DB096D21A8DD5F00DC061A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		74DB097021A8DD5F00DC061A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		74DB097221A8DD5F00DC061A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		74DB095D21A8DD5E00DC061A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		74DB095721A8DD5E00DC061A = {
+			isa = PBXGroup;
+			children = (
+				74DB096221A8DD5E00DC061A /* Luma Face */,
+				74DB096121A8DD5E00DC061A /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		74DB096121A8DD5E00DC061A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				74DB096021A8DD5E00DC061A /* Luma Face.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		74DB096221A8DD5E00DC061A /* Luma Face */ = {
+			isa = PBXGroup;
+			children = (
+				74DB096321A8DD5E00DC061A /* AppDelegate.swift */,
+				74DB096521A8DD5E00DC061A /* ViewController.swift */,
+				74DB096721A8DD5E00DC061A /* Main.storyboard */,
+				74DB096D21A8DD5F00DC061A /* Assets.xcassets */,
+				74DB096F21A8DD5F00DC061A /* LaunchScreen.storyboard */,
+				74DB097221A8DD5F00DC061A /* Info.plist */,
+				74DB096A21A8DD5E00DC061A /* Luma_Face.xcdatamodeld */,
+			);
+			path = "Luma Face";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		74DB095F21A8DD5E00DC061A /* Luma Face */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 74DB097521A8DD5F00DC061A /* Build configuration list for PBXNativeTarget "Luma Face" */;
+			buildPhases = (
+				74DB095C21A8DD5E00DC061A /* Sources */,
+				74DB095D21A8DD5E00DC061A /* Frameworks */,
+				74DB095E21A8DD5E00DC061A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Luma Face";
+			productName = "Luma Face";
+			productReference = 74DB096021A8DD5E00DC061A /* Luma Face.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		74DB095821A8DD5E00DC061A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1010;
+				LastUpgradeCheck = 1010;
+				ORGANIZATIONNAME = Hexagons;
+				TargetAttributes = {
+					74DB095F21A8DD5E00DC061A = {
+						CreatedOnToolsVersion = 10.1;
+					};
+				};
+			};
+			buildConfigurationList = 74DB095B21A8DD5E00DC061A /* Build configuration list for PBXProject "Luma Face" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 74DB095721A8DD5E00DC061A;
+			productRefGroup = 74DB096121A8DD5E00DC061A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				74DB095F21A8DD5E00DC061A /* Luma Face */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		74DB095E21A8DD5E00DC061A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				74DB097121A8DD5F00DC061A /* LaunchScreen.storyboard in Resources */,
+				74DB096E21A8DD5F00DC061A /* Assets.xcassets in Resources */,
+				74DB096921A8DD5E00DC061A /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		74DB095C21A8DD5E00DC061A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				74DB096621A8DD5E00DC061A /* ViewController.swift in Sources */,
+				74DB096C21A8DD5E00DC061A /* Luma_Face.xcdatamodeld in Sources */,
+				74DB096421A8DD5E00DC061A /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		74DB096721A8DD5E00DC061A /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				74DB096821A8DD5E00DC061A /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		74DB096F21A8DD5F00DC061A /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				74DB097021A8DD5F00DC061A /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		74DB097321A8DD5F00DC061A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		74DB097421A8DD5F00DC061A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		74DB097621A8DD5F00DC061A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2QHTY6FMW2;
+				INFOPLIST_FILE = "Luma Face/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "se.hexagons.Luma-Face";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		74DB097721A8DD5F00DC061A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2QHTY6FMW2;
+				INFOPLIST_FILE = "Luma Face/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "se.hexagons.Luma-Face";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		74DB095B21A8DD5E00DC061A /* Build configuration list for PBXProject "Luma Face" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				74DB097321A8DD5F00DC061A /* Debug */,
+				74DB097421A8DD5F00DC061A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		74DB097521A8DD5F00DC061A /* Build configuration list for PBXNativeTarget "Luma Face" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				74DB097621A8DD5F00DC061A /* Debug */,
+				74DB097721A8DD5F00DC061A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		74DB096A21A8DD5E00DC061A /* Luma_Face.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				74DB096B21A8DD5E00DC061A /* Luma_Face.xcdatamodel */,
+			);
+			currentVersion = 74DB096B21A8DD5E00DC061A /* Luma_Face.xcdatamodel */;
+			path = Luma_Face.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 74DB095821A8DD5E00DC061A /* Project object */;
+}
