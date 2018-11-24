@@ -7,15 +7,62 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7404AF4921A8E97A002B47EF /* Pixels.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7455A15121A8E13400679CEB /* Pixels.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7455A14921A8E0C000679CEB /* AR.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7455A14821A8E0C000679CEB /* AR.swift */; };
+		7455A15521A8E19500679CEB /* Pixels.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7455A15121A8E13400679CEB /* Pixels.framework */; };
+		7455A15721A8E1EB00679CEB /* PixelsShaders.metallib in Resources */ = {isa = PBXBuildFile; fileRef = 7455A15621A8E1EB00679CEB /* PixelsShaders.metallib */; };
 		74DB096421A8DD5E00DC061A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74DB096321A8DD5E00DC061A /* AppDelegate.swift */; };
 		74DB096621A8DD5E00DC061A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74DB096521A8DD5E00DC061A /* ViewController.swift */; };
 		74DB096921A8DD5E00DC061A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 74DB096721A8DD5E00DC061A /* Main.storyboard */; };
 		74DB096C21A8DD5E00DC061A /* Luma_Face.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 74DB096A21A8DD5E00DC061A /* Luma_Face.xcdatamodeld */; };
 		74DB096E21A8DD5F00DC061A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 74DB096D21A8DD5F00DC061A /* Assets.xcassets */; };
 		74DB097121A8DD5F00DC061A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 74DB096F21A8DD5F00DC061A /* LaunchScreen.storyboard */; };
+		74DB097921A8DE9D00DC061A /* Luma.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74DB097821A8DE9D00DC061A /* Luma.swift */; };
+		74DB097B21A8DECE00DC061A /* Face.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74DB097A21A8DECE00DC061A /* Face.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		7404AF4A21A8E97A002B47EF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7455A14A21A8E13300679CEB /* Pixels.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 74BC39D621011E3A004E9AA0;
+			remoteInfo = Pixels;
+		};
+		7455A15021A8E13400679CEB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7455A14A21A8E13300679CEB /* Pixels.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 74BC39D721011E3A004E9AA0;
+			remoteInfo = Pixels;
+		};
+		7455A15221A8E13400679CEB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7455A14A21A8E13300679CEB /* Pixels.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3AF28BCC219312900079FC7A;
+			remoteInfo = "Pixels-macOS";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		7404AF4C21A8E97A002B47EF /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				7404AF4921A8E97A002B47EF /* Pixels.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		7455A14821A8E0C000679CEB /* AR.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AR.swift; sourceTree = "<group>"; };
+		7455A14A21A8E13300679CEB /* Pixels.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Pixels.xcodeproj; path = "../../·pixels/··framework/Pixels.xcodeproj"; sourceTree = "<group>"; };
+		7455A15621A8E1EB00679CEB /* PixelsShaders.metallib */ = {isa = PBXFileReference; lastKnownFileType = "archive.metal-library"; name = PixelsShaders.metallib; path = "../../../../Library/Developer/Xcode/DerivedData/Luma_Face-hfbxhbtrcimfetaytkdwqfobkwwg/Build/Products/Debug-iphoneos/PixelsShaders.metallib"; sourceTree = "<group>"; };
 		74DB096021A8DD5E00DC061A /* Luma Face.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Luma Face.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		74DB096321A8DD5E00DC061A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		74DB096521A8DD5E00DC061A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -24,6 +71,8 @@
 		74DB096D21A8DD5F00DC061A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		74DB097021A8DD5F00DC061A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		74DB097221A8DD5F00DC061A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		74DB097821A8DE9D00DC061A /* Luma.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Luma.swift; sourceTree = "<group>"; };
+		74DB097A21A8DECE00DC061A /* Face.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Face.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +80,38 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7455A15521A8E19500679CEB /* Pixels.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7455A14B21A8E13300679CEB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7455A15121A8E13400679CEB /* Pixels.framework */,
+				7455A15321A8E13400679CEB /* Pixels_macOS.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7455A15421A8E19500679CEB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		74DB095721A8DD5E00DC061A = {
 			isa = PBXGroup;
 			children = (
-				74DB096221A8DD5E00DC061A /* Luma Face */,
+				74DB096221A8DD5E00DC061A /* Source */,
+				74DB097C21A8DF5400DC061A /* Resources */,
 				74DB096121A8DD5E00DC061A /* Products */,
+				7455A15421A8E19500679CEB /* Frameworks */,
+				7455A15621A8E1EB00679CEB /* PixelsShaders.metallib */,
+				7455A14A21A8E13300679CEB /* Pixels.xcodeproj */,
 			);
 			sourceTree = "<group>";
 		};
@@ -53,18 +123,28 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		74DB096221A8DD5E00DC061A /* Luma Face */ = {
+		74DB096221A8DD5E00DC061A /* Source */ = {
 			isa = PBXGroup;
 			children = (
 				74DB096321A8DD5E00DC061A /* AppDelegate.swift */,
 				74DB096521A8DD5E00DC061A /* ViewController.swift */,
+				74DB097821A8DE9D00DC061A /* Luma.swift */,
+				74DB097A21A8DECE00DC061A /* Face.swift */,
+				7455A14821A8E0C000679CEB /* AR.swift */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		74DB097C21A8DF5400DC061A /* Resources */ = {
+			isa = PBXGroup;
+			children = (
 				74DB096721A8DD5E00DC061A /* Main.storyboard */,
 				74DB096D21A8DD5F00DC061A /* Assets.xcassets */,
 				74DB096F21A8DD5F00DC061A /* LaunchScreen.storyboard */,
 				74DB097221A8DD5F00DC061A /* Info.plist */,
 				74DB096A21A8DD5E00DC061A /* Luma_Face.xcdatamodeld */,
 			);
-			path = "Luma Face";
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -77,10 +157,13 @@
 				74DB095C21A8DD5E00DC061A /* Sources */,
 				74DB095D21A8DD5E00DC061A /* Frameworks */,
 				74DB095E21A8DD5E00DC061A /* Resources */,
+				7455A14721A8E07E00679CEB /* Build Number */,
+				7404AF4C21A8E97A002B47EF /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				7404AF4B21A8E97A002B47EF /* PBXTargetDependency */,
 			);
 			name = "Luma Face";
 			productName = "Luma Face";
@@ -113,6 +196,12 @@
 			mainGroup = 74DB095721A8DD5E00DC061A;
 			productRefGroup = 74DB096121A8DD5E00DC061A /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 7455A14B21A8E13300679CEB /* Products */;
+					ProjectRef = 7455A14A21A8E13300679CEB /* Pixels.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				74DB095F21A8DD5E00DC061A /* Luma Face */,
@@ -120,11 +209,29 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXReferenceProxy section */
+		7455A15121A8E13400679CEB /* Pixels.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Pixels.framework;
+			remoteRef = 7455A15021A8E13400679CEB /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7455A15321A8E13400679CEB /* Pixels_macOS.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Pixels_macOS.framework;
+			remoteRef = 7455A15221A8E13400679CEB /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
 /* Begin PBXResourcesBuildPhase section */
 		74DB095E21A8DD5E00DC061A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7455A15721A8E1EB00679CEB /* PixelsShaders.metallib in Resources */,
 				74DB097121A8DD5F00DC061A /* LaunchScreen.storyboard in Resources */,
 				74DB096E21A8DD5F00DC061A /* Assets.xcassets in Resources */,
 				74DB096921A8DD5E00DC061A /* Main.storyboard in Resources */,
@@ -133,6 +240,27 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		7455A14721A8E07E00679CEB /* Build Number */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Build Number";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "buildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${INFOPLIST_FILE}\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${INFOPLIST_FILE}\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		74DB095C21A8DD5E00DC061A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -140,11 +268,22 @@
 			files = (
 				74DB096621A8DD5E00DC061A /* ViewController.swift in Sources */,
 				74DB096C21A8DD5E00DC061A /* Luma_Face.xcdatamodeld in Sources */,
+				7455A14921A8E0C000679CEB /* AR.swift in Sources */,
+				74DB097B21A8DECE00DC061A /* Face.swift in Sources */,
 				74DB096421A8DD5E00DC061A /* AppDelegate.swift in Sources */,
+				74DB097921A8DE9D00DC061A /* Luma.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		7404AF4B21A8E97A002B47EF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Pixels;
+			targetProxy = 7404AF4A21A8E97A002B47EF /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		74DB096721A8DD5E00DC061A /* Main.storyboard */ = {
@@ -285,15 +424,16 @@
 		74DB097621A8DD5F00DC061A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2QHTY6FMW2;
-				INFOPLIST_FILE = "Luma Face/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "se.hexagons.Luma-Face";
+				PRODUCT_BUNDLE_IDENTIFIER = se.hexagons.luma.face;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -303,15 +443,16 @@
 		74DB097721A8DD5F00DC061A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2QHTY6FMW2;
-				INFOPLIST_FILE = "Luma Face/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "se.hexagons.Luma-Face";
+				PRODUCT_BUNDLE_IDENTIFIER = se.hexagons.luma.face;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
