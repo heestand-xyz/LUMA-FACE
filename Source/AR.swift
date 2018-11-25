@@ -8,7 +8,15 @@
 
 import ARKit
 
+protocol ARMirror {
+    func didSetup(cam: SCNCamera)
+    func didAdd(node: SCNNode)
+    func didUpdate(geo: ARFaceGeometry)
+}
+
 class AR: NSObject, /*ARSessionDelegate,*/ ARSCNViewDelegate {
+    
+//    var mirror: ARMirror?
     
     static var isSupported: Bool {
         return ARFaceTrackingConfiguration.isSupported
@@ -18,6 +26,12 @@ class AR: NSObject, /*ARSessionDelegate,*/ ARSCNViewDelegate {
     
     let session: ARSession
     let scnView: ARSCNView
+    
+    var lowFps: Bool = false
+    
+    var node: SCNNode?
+    
+//    var image: UIImage?
     
 //    var faceAnchor: ARFaceAnchor?
 //    let scnFaceGeometry: ARSCNFaceGeometry
@@ -47,17 +61,46 @@ class AR: NSObject, /*ARSessionDelegate,*/ ARSCNViewDelegate {
         
 //        scnFaceGeometry.firstMaterial!.fillMode = .lines
 //        faceNode.geometry = scnFaceGeometry
+        
+//        mirror?.didSetup(cam: scnView.scene.rootNode.camera!)
+        
+        let bgSphere = SCNSphere(radius: 10)
+        bgSphere.firstMaterial!.isDoubleSided = true
+        bgSphere.firstMaterial!.diffuse.contents = UIColor.black
+        let bgNode = SCNNode(geometry: bgSphere)
+        scnView.scene.rootNode.addChildNode(bgNode)
 
     }
     
     func run() {
         let config = ARFaceTrackingConfiguration()
+        if lowFps {
+            if #available(iOS 11.3, *) {
+                config.videoFormat = ARFaceTrackingConfiguration.supportedVideoFormats.last!
+            }
+        }
         config.isLightEstimationEnabled = false
-        session.run(config)
+        let options: ARSession.RunOptions = [
+            .resetTracking,
+            .removeExistingAnchors
+        ]
+        session.run(config, options: options)
     }
     
     func pause() {
         session.pause()
+    }
+    
+    func addImage(_ image: UIImage) {
+        guard node != nil else { return }
+        node!.geometry!.firstMaterial!.fillMode = .fill
+        node!.geometry!.firstMaterial!.diffuse.contents = image
+    }
+    
+    func removeImage() {
+        guard node != nil else { return }
+        node!.geometry!.firstMaterial!.fillMode = .lines
+        node!.geometry!.firstMaterial!.diffuse.contents = nil
     }
     
     // MARK: AR Delegation
@@ -69,11 +112,11 @@ class AR: NSObject, /*ARSessionDelegate,*/ ARSCNViewDelegate {
 ////        scnFaceGeometry.update(from: faceAnchor!.geometry)
 //        scnView.scene.rootNode.addChildNode(faceNode)
 //    }
-//
-//    func session(_ session: ARSession, didUpdate anchors: [ARAnchor]) {
+
+    func session(_ session: ARSession, didUpdate anchors: [ARAnchor]) {
 //        guard let faceAnchor = anchors.first! as? ARFaceAnchor else { return }
 //        scnFaceGeometry.update(from: faceAnchor.geometry)
-//    }
+    }
     
     func renderer(_ renderer: SCNSceneRenderer,
                   nodeFor anchor: ARAnchor) -> SCNNode? {
@@ -84,8 +127,10 @@ class AR: NSObject, /*ARSessionDelegate,*/ ARSCNViewDelegate {
         }
         
         let faceGeometry = ARSCNFaceGeometry(device: device)
-        let node = SCNNode(geometry: faceGeometry)
-        node.geometry!.firstMaterial!.fillMode = .lines
+        node = SCNNode(geometry: faceGeometry)
+        node!.geometry!.firstMaterial!.fillMode = .lines
+        
+//        mirror?.didAdd(node: node!)
         
         return node
     }
@@ -99,7 +144,13 @@ class AR: NSObject, /*ARSessionDelegate,*/ ARSCNViewDelegate {
                 return
         }
         
-        faceGeometry.update(from: faceAnchor.geometry)
+        let geo = faceAnchor.geometry
+        faceGeometry.update(from: geo)
+//        mirror?.didUpdate(geo: geo)
+    }
+    
+    func renderer(_ renderer: SCNSceneRenderer, didRemove node: SCNNode, for anchor: ARAnchor) {
+        self.node = nil
     }
     
 }

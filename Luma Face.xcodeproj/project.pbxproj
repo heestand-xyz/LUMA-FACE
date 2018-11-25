@@ -10,7 +10,11 @@
 		7404AF4921A8E97A002B47EF /* Pixels.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7455A15121A8E13400679CEB /* Pixels.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7455A14921A8E0C000679CEB /* AR.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7455A14821A8E0C000679CEB /* AR.swift */; };
 		7455A15521A8E19500679CEB /* Pixels.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7455A15121A8E13400679CEB /* Pixels.framework */; };
-		7455A15721A8E1EB00679CEB /* PixelsShaders.metallib in Resources */ = {isa = PBXBuildFile; fileRef = 7455A15621A8E1EB00679CEB /* PixelsShaders.metallib */; };
+		7457044421A9D236007C3DB9 /* FileAssistant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7457044221A9D236007C3DB9 /* FileAssistant.swift */; };
+		7457044621A9D30F007C3DB9 /* ViewAssistant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7457044521A9D30F007C3DB9 /* ViewAssistant.swift */; };
+		7457044821AACAF1007C3DB9 /* 3D.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 7457044721AACAF1007C3DB9 /* 3D.scnassets */; };
+		7457044A21AACB24007C3DB9 /* Sim.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7457044921AACB24007C3DB9 /* Sim.swift */; };
+		748E257921AAD6F50047817E /* PixelsShaders.metallib in Resources */ = {isa = PBXBuildFile; fileRef = 748E257821AAD6F50047817E /* PixelsShaders.metallib */; };
 		74DB096421A8DD5E00DC061A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74DB096321A8DD5E00DC061A /* AppDelegate.swift */; };
 		74DB096621A8DD5E00DC061A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74DB096521A8DD5E00DC061A /* ViewController.swift */; };
 		74DB096921A8DD5E00DC061A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 74DB096721A8DD5E00DC061A /* Main.storyboard */; };
@@ -62,7 +66,11 @@
 /* Begin PBXFileReference section */
 		7455A14821A8E0C000679CEB /* AR.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AR.swift; sourceTree = "<group>"; };
 		7455A14A21A8E13300679CEB /* Pixels.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Pixels.xcodeproj; path = "../../·pixels/··framework/Pixels.xcodeproj"; sourceTree = "<group>"; };
-		7455A15621A8E1EB00679CEB /* PixelsShaders.metallib */ = {isa = PBXFileReference; lastKnownFileType = "archive.metal-library"; name = PixelsShaders.metallib; path = "../../../../Library/Developer/Xcode/DerivedData/Luma_Face-hfbxhbtrcimfetaytkdwqfobkwwg/Build/Products/Debug-iphoneos/PixelsShaders.metallib"; sourceTree = "<group>"; };
+		7457044221A9D236007C3DB9 /* FileAssistant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileAssistant.swift; sourceTree = "<group>"; };
+		7457044521A9D30F007C3DB9 /* ViewAssistant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewAssistant.swift; sourceTree = "<group>"; };
+		7457044721AACAF1007C3DB9 /* 3D.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = 3D.scnassets; sourceTree = "<group>"; };
+		7457044921AACB24007C3DB9 /* Sim.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sim.swift; sourceTree = "<group>"; };
+		748E257821AAD6F50047817E /* PixelsShaders.metallib */ = {isa = PBXFileReference; lastKnownFileType = "archive.metal-library"; name = PixelsShaders.metallib; path = "../../../../Library/Developer/Xcode/DerivedData/Luma_Face-hfbxhbtrcimfetaytkdwqfobkwwg/Build/Products/Debug-iphoneos/PixelsShaders.metallib"; sourceTree = "<group>"; };
 		74DB096021A8DD5E00DC061A /* Luma Face.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Luma Face.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		74DB096321A8DD5E00DC061A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		74DB096521A8DD5E00DC061A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -108,9 +116,9 @@
 			children = (
 				74DB096221A8DD5E00DC061A /* Source */,
 				74DB097C21A8DF5400DC061A /* Resources */,
+				748E257821AAD6F50047817E /* PixelsShaders.metallib */,
 				74DB096121A8DD5E00DC061A /* Products */,
 				7455A15421A8E19500679CEB /* Frameworks */,
-				7455A15621A8E1EB00679CEB /* PixelsShaders.metallib */,
 				7455A14A21A8E13300679CEB /* Pixels.xcodeproj */,
 			);
 			sourceTree = "<group>";
@@ -131,6 +139,9 @@
 				74DB097821A8DE9D00DC061A /* Luma.swift */,
 				74DB097A21A8DECE00DC061A /* Face.swift */,
 				7455A14821A8E0C000679CEB /* AR.swift */,
+				7457044921AACB24007C3DB9 /* Sim.swift */,
+				7457044521A9D30F007C3DB9 /* ViewAssistant.swift */,
+				7457044221A9D236007C3DB9 /* FileAssistant.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -143,6 +154,7 @@
 				74DB096F21A8DD5F00DC061A /* LaunchScreen.storyboard */,
 				74DB097221A8DD5F00DC061A /* Info.plist */,
 				74DB096A21A8DD5E00DC061A /* Luma_Face.xcdatamodeld */,
+				7457044721AACAF1007C3DB9 /* 3D.scnassets */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -231,8 +243,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7455A15721A8E1EB00679CEB /* PixelsShaders.metallib in Resources */,
+				748E257921AAD6F50047817E /* PixelsShaders.metallib in Resources */,
 				74DB097121A8DD5F00DC061A /* LaunchScreen.storyboard in Resources */,
+				7457044821AACAF1007C3DB9 /* 3D.scnassets in Resources */,
 				74DB096E21A8DD5F00DC061A /* Assets.xcassets in Resources */,
 				74DB096921A8DD5E00DC061A /* Main.storyboard in Resources */,
 			);
@@ -268,10 +281,13 @@
 			files = (
 				74DB096621A8DD5E00DC061A /* ViewController.swift in Sources */,
 				74DB096C21A8DD5E00DC061A /* Luma_Face.xcdatamodeld in Sources */,
+				7457044A21AACB24007C3DB9 /* Sim.swift in Sources */,
 				7455A14921A8E0C000679CEB /* AR.swift in Sources */,
+				7457044621A9D30F007C3DB9 /* ViewAssistant.swift in Sources */,
 				74DB097B21A8DECE00DC061A /* Face.swift in Sources */,
 				74DB096421A8DD5E00DC061A /* AppDelegate.swift in Sources */,
 				74DB097921A8DE9D00DC061A /* Luma.swift in Sources */,
+				7457044421A9D236007C3DB9 /* FileAssistant.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -429,6 +445,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2QHTY6FMW2;
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -448,6 +465,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2QHTY6FMW2;
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
