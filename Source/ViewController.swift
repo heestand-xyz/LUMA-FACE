@@ -10,6 +10,8 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    var luma: Luma!
+    
     var ar: AR?
 //    var face: Face?
     var sim: Sim?
@@ -35,6 +37,8 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         
+        luma = Luma(frame: view.bounds)
+        
         if AR.isSupported {
             ar = AR(frame: view.bounds)
 //            face = Face(frame: view.bounds)
@@ -42,7 +46,9 @@ class ViewController: UIViewController {
             sim = Sim(frame: view.bounds)
         }
         
+        
         super.viewDidLoad()
+        
         
         if AR.isSupported {
 //            ar!.mirror = face
@@ -52,6 +58,11 @@ class ViewController: UIViewController {
         } else {
             view.addSubview(sim!.view)
         }
+        
+        if AR.isSupported {
+            ar!.mirror = luma
+        }
+        view.addSubview(luma.view)
         
         let longPress = UILongPressGestureRecognizer(target: self, action: #selector(addFaceMask))
         view.addGestureRecognizer(longPress)

@@ -45,7 +45,7 @@ class Sim {
         node.geometry!.firstMaterial!.fillMode = .fill
 //        guard let cgImage = image.cgImage else { print("bad img"); return }
 //        let flippedImage = UIImage(cgImage: cgImage, scale: image.scale, orientation: .up)
-        let flippedImage = Luma.light.flipImage(image)
+        let flippedImage = Luma.flipImage(image)
         self.node.geometry!.firstMaterial!.diffuse.contents = flippedImage
 //        Luma.light.flipY(image: image) { pixImage in }
     }

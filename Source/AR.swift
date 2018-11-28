@@ -9,14 +9,14 @@
 import ARKit
 
 protocol ARMirror {
-    func didSetup(cam: SCNCamera)
-    func didAdd(node: SCNNode)
+//    func didSetup(cam: SCNCamera)
+//    func didAdd(node: SCNNode)
     func didUpdate(geo: ARFaceGeometry)
 }
 
 class AR: NSObject, /*ARSessionDelegate,*/ ARSCNViewDelegate {
     
-//    var mirror: ARMirror?
+    var mirror: ARMirror?
     
     static var isSupported: Bool {
         return ARFaceTrackingConfiguration.isSupported
@@ -140,13 +140,13 @@ class AR: NSObject, /*ARSessionDelegate,*/ ARSCNViewDelegate {
                   for anchor: ARAnchor) {
         
         guard let faceAnchor = anchor as? ARFaceAnchor,
-            let faceGeometry = node.geometry as? ARSCNFaceGeometry else {
+              let faceGeometry = node.geometry as? ARSCNFaceGeometry else {
                 return
         }
         
         let geo = faceAnchor.geometry
         faceGeometry.update(from: geo)
-//        mirror?.didUpdate(geo: geo)
+        mirror?.didUpdate(geo: geo)
     }
     
     func renderer(_ renderer: SCNSceneRenderer, didRemove node: SCNNode, for anchor: ARAnchor) {
