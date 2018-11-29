@@ -53,6 +53,7 @@ class ViewController: UIViewController {
         if AR.isSupported {
 //            ar!.mirror = face
 //            ar!.view.alpha = 0.1
+            ar!.view.alpha = 0.25
             view.addSubview(ar!.view)
 //            view.addSubview(face!.view)
         } else {

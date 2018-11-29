@@ -17,6 +17,7 @@ class Luma: PIXDelegate, ARMirror {
     
 //    var renderCallbacks: [(pix: PIX, callback: () -> ())] = []
     
+    var object3dPix: Object3DPIX!
     var finalPix: PIX!
     
     var view: UIView {
@@ -25,21 +26,31 @@ class Luma: PIXDelegate, ARMirror {
     
     init(frame: CGRect) {
         
-        let polygonPix = PolygonPIX(res: PIX.Res(autoScaleSize: frame.size))
-        polygonPix.color = LiveColor.white.withAlpha(of: 0.1)
+        let res = PIX.Res(autoScaleSize: frame.size)
+        
+        let polygonPix = PolygonPIX(res: res)
+        polygonPix.color = LiveColor.white.withAlpha(of: 0.25)
         polygonPix.bgColor = .clear
         
-        let object3dPix = Object3DPIX()
-        object3dPix
+        object3dPix = Object3DPIX(res: res)
         
-        finalPix = polygonPix
+        finalPix = polygonPix & object3dPix
         finalPix.view.frame = frame
         finalPix.view.checker = false
         
     }
     
     func didUpdate(geo: ARFaceGeometry) {
-        
+        object3dPix.verts = geo.vertices.map({ v -> _3DVec in
+            return _3DVec(x: CGFloat(v.x), y: CGFloat(v.y), z: CGFloat(v.z))
+        })
+        object3dPix.uvs = geo.textureCoordinates.map({ v -> _3DUV in
+            return _3DUV(u: CGFloat(v.x), v: CGFloat(v.y))
+        })
+        object3dPix.triCount = geo.triangleCount
+        object3dPix.triMap = geo.triangleIndices.map({ i -> Int in
+            return Int(i)
+        })
     }
     
     
