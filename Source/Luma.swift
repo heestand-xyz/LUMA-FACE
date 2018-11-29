@@ -28,27 +28,27 @@ class Luma: PIXDelegate, ARMirror {
         
         let res = PIX.Res(autoScaleSize: frame.size)
         
-        let polygonPix = PolygonPIX(res: res)
-        polygonPix.color = LiveColor.white.withAlpha(of: 0.25)
-        polygonPix.bgColor = .clear
+//        let polygonPix = PolygonPIX(res: res)
+//        polygonPix.color = LiveColor.white.withAlpha(of: 0.25)
+//        polygonPix.bgColor = .clear
         
         object3dPix = Object3DPIX(res: res)
         
-        finalPix = polygonPix & object3dPix
+        finalPix = object3dPix
         finalPix.view.frame = frame
         finalPix.view.checker = false
         
     }
     
     func didUpdate(geo: ARFaceGeometry) {
-        object3dPix.verts = geo.vertices.map({ v -> _3DVec in
+        object3dPix.triangleVertices = geo.vertices.map({ v -> _3DVec in
             return _3DVec(x: CGFloat(v.x), y: CGFloat(v.y), z: CGFloat(v.z))
         })
-        object3dPix.uvs = geo.textureCoordinates.map({ v -> _3DUV in
+        object3dPix.triangleUVs = geo.textureCoordinates.map({ v -> _3DUV in
             return _3DUV(u: CGFloat(v.x), v: CGFloat(v.y))
         })
-        object3dPix.triCount = geo.triangleCount
-        object3dPix.triMap = geo.triangleIndices.map({ i -> Int in
+        object3dPix.triangleCount = geo.triangleCount
+        object3dPix.triangleIndices = geo.triangleIndices.map({ i -> Int in
             return Int(i)
         })
     }
