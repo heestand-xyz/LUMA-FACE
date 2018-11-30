@@ -9,11 +9,11 @@
 import ARKit
 
 protocol ARMirror {
-//    func didSetup(cam: SCNCamera)
+    func activityUpdated(_ active: Bool)
+    func didUpdate(arFrame: ARFrame)
     func didAdd()
     func didUpdate(geo: ARFaceGeometry)
     func didRemove()
-    func activityUpdated(_ active: Bool)
 }
 
 class AR: NSObject, ARSessionDelegate, ARSCNViewDelegate {
@@ -123,6 +123,9 @@ class AR: NSObject, ARSessionDelegate, ARSCNViewDelegate {
             mirrors.forEach { mirror in
                 mirror.activityUpdated(isActive)
             }
+        }
+        mirrors.forEach { mirror in
+            mirror.didUpdate(arFrame: frame)
         }
     }
     

@@ -135,12 +135,6 @@ class ViewController: UIViewController, ARMirror, PixelsDelegate {
     
     // MARK: - AR
     
-    func didAdd() {}
-    
-    func didUpdate(geo: ARFaceGeometry) {}
-    
-    func didRemove() {}
-    
     func activityUpdated(_ active: Bool) {
         indiTopLeftView.backgroundColor = active ? .white : UIColor(white: 0.1, alpha: 1.0)
         UIView.animate(withDuration: 0.5, animations: {
@@ -151,6 +145,14 @@ class ViewController: UIViewController, ARMirror, PixelsDelegate {
             }
         }
     }
+    
+    func didUpdate(arFrame: ARFrame) {}
+    
+    func didAdd() {}
+    
+    func didUpdate(geo: ARFaceGeometry) {}
+    
+    func didRemove() {}
     
     
     // MARK: Face Mask

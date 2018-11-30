@@ -31,7 +31,7 @@ class Luma: PIXDelegate, ARMirror {
         
         let res = PIX.Res(autoScaleSize: frame.size)
         
-        let polygonPix = PolygonPIX(res: res)
+//        let polygonPix = PolygonPIX(res: res)
 //        polygonPix.color = LiveColor.white.withAlpha(of: 0.25)
 //        polygonPix.bgColor = .clear
         
@@ -40,6 +40,16 @@ class Luma: PIXDelegate, ARMirror {
         finalPix = object3dPix
         finalPix.view.frame = frame
         finalPix.view.checker = false
+        
+    }
+    
+    // MARK: - AR
+    
+    func activityUpdated(_ active: Bool) {
+        print("LUMA ACTIVE", active)
+    }
+    
+    func didUpdate(arFrame: ARFrame) {
         
     }
     
@@ -65,9 +75,7 @@ class Luma: PIXDelegate, ARMirror {
         print("LUMA RM")
     }
     
-    func activityUpdated(_ active: Bool) {
-        print("LUMA ACTIVE", active)
-    }
+    // MARK: Luma
     
     func clear() {
         print("LUMA CLEAR")
@@ -76,7 +84,7 @@ class Luma: PIXDelegate, ARMirror {
         object3dPix.triangleIndices = []
     }
     
-    
+    // MARK: Flip
     
 //    func flipY(image: UIImage, callback: @escaping (UIImage) -> ()) {
 //        print("flipY >>>")
@@ -110,6 +118,8 @@ class Luma: PIXDelegate, ARMirror {
         
         return image
     }
+    
+    // MARK: Pixels
     
     func pixResChanged(_ pix: PIX, to res: PIX.Res) {}
     
