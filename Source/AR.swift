@@ -13,11 +13,12 @@ protocol ARMirror {
     func didAdd()
     func didUpdate(geo: ARFaceGeometry)
     func didRemove()
+    func activityUpdated(_ active: Bool)
 }
 
 class AR: NSObject, ARSessionDelegate, ARSCNViewDelegate {
     
-    var mirror: ARMirror?
+    var mirrors: [ARMirror] = []
     
     static var isSupported: Bool {
         return ARFaceTrackingConfiguration.isSupported
@@ -31,6 +32,14 @@ class AR: NSObject, ARSessionDelegate, ARSCNViewDelegate {
     var lowFps: Bool = false
     
     var node: SCNNode?
+    
+    var lastUpdate: Date?
+    var lastActive: Bool {
+        guard let date = lastUpdate else { return false }
+        let time = -date.timeIntervalSinceNow
+        return time < 0.1
+    }
+    var isActive: Bool = false
     
 //    var image: UIImage?
     
@@ -108,11 +117,20 @@ class AR: NSObject, ARSessionDelegate, ARSCNViewDelegate {
     
     func session(_ session: ARSession, didUpdate frame: ARFrame) {
         print("AR SE FRAME")
+        if isActive != lastActive {
+            isActive = lastActive
+            print("AR ACTIVE", isActive)
+            mirrors.forEach { mirror in
+                mirror.activityUpdated(isActive)
+            }
+        }
     }
     
     func session(_ session: ARSession, didAdd anchors: [ARAnchor]) {
         print("AR SE ADD", anchors.count)
-        mirror?.didAdd()
+        mirrors.forEach { mirror in
+            mirror.didAdd()
+        }
 ////        guard faceAnchor == nil else { print("FACE too late.."); return }
 ////        faceAnchor = anchors.first! as? ARFaceAnchor
 ////        guard faceAnchor != nil else { print("FaceAnchor not valid.."); return }
@@ -126,14 +144,21 @@ class AR: NSObject, ARSessionDelegate, ARSCNViewDelegate {
             print("Non face anchor.")
             return
         }
-        self.mirror?.didUpdate(geo: faceAnchor.geometry)
+        mirrors.forEach { mirror in
+            mirror.didUpdate(geo: faceAnchor.geometry)
+        }
+        
+        lastUpdate = Date()
+        
 //        guard let faceAnchor = anchors.first! as? ARFaceAnchor else { return }
 //        scnFaceGeometry.update(from: faceAnchor.geometry)
     }
     
     func session(_ session: ARSession, didRemove anchors: [ARAnchor]) {
         print("AR SE RM", anchors.count)
-        mirror?.didRemove()
+        mirrors.forEach { mirror in
+            mirror.didRemove()
+        }
     }
     
     // MARK: ARSCNViewDelegate

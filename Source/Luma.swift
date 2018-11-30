@@ -31,7 +31,7 @@ class Luma: PIXDelegate, ARMirror {
         
         let res = PIX.Res(autoScaleSize: frame.size)
         
-//        let polygonPix = PolygonPIX(res: res)
+        let polygonPix = PolygonPIX(res: res)
 //        polygonPix.color = LiveColor.white.withAlpha(of: 0.25)
 //        polygonPix.bgColor = .clear
         
@@ -55,17 +55,24 @@ class Luma: PIXDelegate, ARMirror {
         object3dPix.triangleUVs = geo.textureCoordinates.map({ v -> _3DUV in
             return _3DUV(u: CGFloat(v.x), v: CGFloat(v.y))
         })
-        object3dPix.triangleCount = geo.triangleCount
         object3dPix.triangleIndices = geo.triangleIndices.map({ i -> Int in
             return Int(i)
         })
+        print(geo.triangleCount, "===============", geo.triangleCount)
     }
     
     func didRemove() {
         print("LUMA RM")
+    }
+    
+    func activityUpdated(_ active: Bool) {
+        print("LUMA ACTIVE", active)
+    }
+    
+    func clear() {
+        print("LUMA CLEAR")
         object3dPix.triangleVertices = []
         object3dPix.triangleUVs = []
-        object3dPix.triangleCount = 0
         object3dPix.triangleIndices = []
     }
     

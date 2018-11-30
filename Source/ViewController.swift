@@ -6,10 +6,11 @@
 //  Copyright © 2018 Hexagons. All rights reserved.
 //
 
-import UIKit
+import ARKit
+import Pixels
 
-class ViewController: UIViewController {
-
+class ViewController: UIViewController, ARMirror, PixelsDelegate {
+    
     var luma: Luma!
     
     var ar: AR?
@@ -27,6 +28,8 @@ class ViewController: UIViewController {
     var indiTopLeftView: UIView!
     var indiTopRightView: UIView!
     
+    var fpsLabel: UILabel!
+    
     override var prefersStatusBarHidden: Bool {
         return true
     }
@@ -36,6 +39,8 @@ class ViewController: UIViewController {
     }
     
     override func viewDidLoad() {
+        
+        Pixels.main.delegate = self
         
         luma = Luma(frame: view.bounds)
         
@@ -51,18 +56,14 @@ class ViewController: UIViewController {
         
         
         if AR.isSupported {
-//            ar!.mirror = face
-//            ar!.view.alpha = 0.1
+            ar!.mirrors = [self, luma]
             ar!.view.alpha = 0
             view.addSubview(ar!.view)
-//            view.addSubview(face!.view)
         } else {
             view.addSubview(sim!.view)
         }
         
-        if AR.isSupported {
-            ar!.mirror = luma
-        }
+        luma.view.alpha = 0.1
         view.addSubview(luma.view)
         
         let longPress = UILongPressGestureRecognizer(target: self, action: #selector(addFaceMask))
@@ -86,14 +87,21 @@ class ViewController: UIViewController {
         indiBottomRightView.layer.cornerRadius = 5
         indiTopLeftView.layer.cornerRadius = 5
         indiTopRightView.layer.cornerRadius = 5
-        indiBottomLeftView.backgroundColor = .darkGray
-        indiBottomRightView.backgroundColor = .darkGray
-        indiTopLeftView.backgroundColor = .darkGray
-        indiTopRightView.backgroundColor = .darkGray
+        indiBottomLeftView.backgroundColor = UIColor(white: 0.1, alpha: 1.0)
+        indiBottomRightView.backgroundColor = UIColor(white: 0.1, alpha: 1.0)
+        indiTopLeftView.backgroundColor = UIColor(white: 0.1, alpha: 1.0)
+        indiTopRightView.backgroundColor = UIColor(white: 0.1, alpha: 1.0)
         view.addSubview(indiBottomLeftView)
         view.addSubview(indiBottomRightView)
         view.addSubview(indiTopLeftView)
         view.addSubview(indiTopRightView)
+        
+        fpsLabel = UILabel(frame: CGRect(x: view.bounds.width / 2 - 50, y: view.bounds.height - 20, width: 100, height: 20))
+        fpsLabel.text = "# fps"
+        fpsLabel.textColor = .white
+        fpsLabel.textAlignment = .center
+        fpsLabel.font = UIFont.monospacedDigitSystemFont(ofSize: 15, weight: .heavy)
+        view.addSubview(fpsLabel)
         
         NotificationCenter.default.addObserver(self, selector: #selector(appWillEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(batteryLevelDidChange), name: UIDevice.batteryLevelDidChangeNotification, object: nil)
@@ -119,22 +127,31 @@ class ViewController: UIViewController {
         }
     }
     
-    // MARK: Battery
+    // MARK: - Pixels
     
-    @objc func appWillEnterForeground() {
-        checkBattery()
+    func pixelsFrameLoop() {
+        fpsLabel.text = "\(Pixels.main.fps) fps"
     }
     
-    @objc func batteryLevelDidChange() {
-        checkBattery()
+    // MARK: - AR
+    
+    func didAdd() {}
+    
+    func didUpdate(geo: ARFaceGeometry) {}
+    
+    func didRemove() {}
+    
+    func activityUpdated(_ active: Bool) {
+        indiTopLeftView.backgroundColor = active ? .white : UIColor(white: 0.1, alpha: 1.0)
+        UIView.animate(withDuration: 0.5, animations: {
+            self.luma.view.alpha = active ? 1.0 : 0.1
+        }) { _ in
+            if !active {
+                self.luma.clear()
+            }
+        }
     }
     
-    func checkBattery() {
-        let battery = CGFloat(UIDevice.current.batteryLevel)
-        guard battery != -1 else { return }
-        indiTopRightView.backgroundColor = battery > 0.5 ? .white : .clear
-//        indiTopRightView.backgroundColor = UIColor(displayP3Red: 1 - max(0, battery * 2 - 1), green: min(1, battery * 2), blue: 0.0, alpha: 1.0)
-    }
     
     // MARK: Face Mask
     
@@ -208,7 +225,7 @@ class ViewController: UIViewController {
             ar!.view.transform = CGAffineTransform.identity
                 .translatedBy(x: position.x, y: position.y)
                 .scaledBy(x: zoom * flip, y: zoom)
-            indiBottomLeftView.backgroundColor = .clear
+            indiBottomLeftView.backgroundColor = UIColor(white: 0.1, alpha: 1.0)
         }
     }
     
@@ -223,5 +240,22 @@ class ViewController: UIViewController {
     func indiMaskReset() {
         indiBottomLeftView.backgroundColor = .white
     }
-
+    
+    // MARK: Battery
+    
+    @objc func appWillEnterForeground() {
+        checkBattery()
+    }
+    
+    @objc func batteryLevelDidChange() {
+        checkBattery()
+    }
+    
+    func checkBattery() {
+        let battery = CGFloat(UIDevice.current.batteryLevel)
+        guard battery != -1 else { return }
+        indiTopRightView.backgroundColor = battery > 0.5 ? .white : UIColor(white: 0.1, alpha: 1.0)
+        //        indiTopRightView.backgroundColor = UIColor(displayP3Red: 1 - max(0, battery * 2 - 1), green: min(1, battery * 2), blue: 0.0, alpha: 1.0)
+    }
+    
 }
