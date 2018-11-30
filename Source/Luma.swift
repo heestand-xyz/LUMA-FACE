@@ -26,6 +26,9 @@ class Luma: PIXDelegate, ARMirror {
     
     init(frame: CGRect) {
         
+        Pixels.main.logLevel = .debug
+        Pixels.main.logAll()
+        
         let res = PIX.Res(autoScaleSize: frame.size)
         
 //        let polygonPix = PolygonPIX(res: res)
@@ -40,7 +43,12 @@ class Luma: PIXDelegate, ARMirror {
         
     }
     
+    func didAdd() {
+        print("LUMA ADD")
+    }
+    
     func didUpdate(geo: ARFaceGeometry) {
+        print("LUMA NEW")
         object3dPix.triangleVertices = geo.vertices.map({ v -> _3DVec in
             return _3DVec(x: CGFloat(v.x), y: CGFloat(v.y), z: CGFloat(v.z))
         })
@@ -52,6 +60,15 @@ class Luma: PIXDelegate, ARMirror {
             return Int(i)
         })
     }
+    
+    func didRemove() {
+        print("LUMA RM")
+        object3dPix.triangleVertices = []
+        object3dPix.triangleUVs = []
+        object3dPix.triangleCount = 0
+        object3dPix.triangleIndices = []
+    }
+    
     
     
 //    func flipY(image: UIImage, callback: @escaping (UIImage) -> ()) {

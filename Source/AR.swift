@@ -10,11 +10,12 @@ import ARKit
 
 protocol ARMirror {
 //    func didSetup(cam: SCNCamera)
-//    func didAdd(node: SCNNode)
+    func didAdd()
     func didUpdate(geo: ARFaceGeometry)
+    func didRemove()
 }
 
-class AR: NSObject, /*ARSessionDelegate,*/ ARSCNViewDelegate {
+class AR: NSObject, ARSessionDelegate, ARSCNViewDelegate {
     
     var mirror: ARMirror?
     
@@ -53,7 +54,7 @@ class AR: NSObject, /*ARSessionDelegate,*/ ARSCNViewDelegate {
         super.init()
         
         
-//        session.delegate = self
+        session.delegate = self
         
         scnView.session = session
         scnView.delegate = self
@@ -103,23 +104,43 @@ class AR: NSObject, /*ARSessionDelegate,*/ ARSCNViewDelegate {
         node!.geometry!.firstMaterial!.diffuse.contents = nil
     }
     
-    // MARK: AR Delegation
+    // MARK: ARSessionDelegate
     
-//    func session(_ session: ARSession, didAdd anchors: [ARAnchor]) {
+    func session(_ session: ARSession, didUpdate frame: ARFrame) {
+        print("AR SE FRAME")
+    }
+    
+    func session(_ session: ARSession, didAdd anchors: [ARAnchor]) {
+        print("AR SE ADD", anchors.count)
+        mirror?.didAdd()
 ////        guard faceAnchor == nil else { print("FACE too late.."); return }
 ////        faceAnchor = anchors.first! as? ARFaceAnchor
 ////        guard faceAnchor != nil else { print("FaceAnchor not valid.."); return }
 ////        scnFaceGeometry.update(from: faceAnchor!.geometry)
 //        scnView.scene.rootNode.addChildNode(faceNode)
-//    }
+    }
 
     func session(_ session: ARSession, didUpdate anchors: [ARAnchor]) {
+        print("AR SE NEW", anchors.count)
+        guard let faceAnchor = anchors.first! as? ARFaceAnchor else {
+            print("Non face anchor.")
+            return
+        }
+        self.mirror?.didUpdate(geo: faceAnchor.geometry)
 //        guard let faceAnchor = anchors.first! as? ARFaceAnchor else { return }
 //        scnFaceGeometry.update(from: faceAnchor.geometry)
     }
     
+    func session(_ session: ARSession, didRemove anchors: [ARAnchor]) {
+        print("AR SE RM", anchors.count)
+        mirror?.didRemove()
+    }
+    
+    // MARK: ARSCNViewDelegate
+    
     func renderer(_ renderer: SCNSceneRenderer,
                   nodeFor anchor: ARAnchor) -> SCNNode? {
+        print("AR SCN NODE")
         
         guard let device = scnView.device else {
             print("AR Error: Device not found.")
@@ -130,27 +151,44 @@ class AR: NSObject, /*ARSessionDelegate,*/ ARSCNViewDelegate {
         node = SCNNode(geometry: faceGeometry)
         node!.geometry!.firstMaterial!.fillMode = .lines
         
-//        mirror?.didAdd(node: node!)
         
         return node
+    }
+    
+    func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
+        print("AR SCN DID ADD")
+//        mirror?.didAdd()
+    }
+    
+    func renderer(_ renderer: SCNSceneRenderer, willUpdate node: SCNNode, for anchor: ARAnchor) {
+        print("AR SCN WILL NEW")
     }
     
     func renderer(_ renderer: SCNSceneRenderer,
                   didUpdate node: SCNNode,
                   for anchor: ARAnchor) {
+        print("AR SCN DID NEW")
         
         guard let faceAnchor = anchor as? ARFaceAnchor,
               let faceGeometry = node.geometry as? ARSCNFaceGeometry else {
+                print("Non face anchor.")
                 return
         }
         
         let geo = faceAnchor.geometry
         faceGeometry.update(from: geo)
-        mirror?.didUpdate(geo: geo)
+//        DispatchQueue(label: "AR").async {
+//        DispatchQueue.global(qos: .background).async {
+//            self.mirror?.didUpdate(geo: geo)
+//        }
     }
     
-    func renderer(_ renderer: SCNSceneRenderer, didRemove node: SCNNode, for anchor: ARAnchor) {
+    func renderer(_ renderer: SCNSceneRenderer,
+                  didRemove node: SCNNode,
+                  for anchor: ARAnchor) {
+        print("AR SCN DID RM")
         self.node = nil
+//        mirror?.didRemove()
     }
     
 }

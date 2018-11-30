@@ -8,7 +8,7 @@
 
 import ARKit
 
-class Face: ARMirror {
+class Face/*: ARMirror*/ {
     
     let scene: SCNScene
     let view: SCNView
@@ -27,24 +27,24 @@ class Face: ARMirror {
         
     }
     
-    func didSetup(cam: SCNCamera) {
-        print("CAM")
-        scene.rootNode.camera = cam
-    }
-    
-    func didAdd(node: SCNNode) {
-        print("NODE")
-        self.node = node
-        scene.rootNode.addChildNode(node)
-    }
-    
-    func didUpdate(geo: ARFaceGeometry) {
-        print("GEO")
-        guard let faceGeometry = self.node?.geometry as? ARSCNFaceGeometry else {
-            print("Face Mirror Failed.")
-            return
-        }
-        faceGeometry.update(from: geo)
-    }
+//    func didSetup(cam: SCNCamera) {
+//        print("CAM")
+//        scene.rootNode.camera = cam
+//    }
+//
+//    func didAdd(node: SCNNode) {
+//        print("NODE")
+//        self.node = node
+//        scene.rootNode.addChildNode(node)
+//    }
+//
+//    func didUpdate(geo: ARFaceGeometry) {
+//        print("GEO")
+//        guard let faceGeometry = self.node?.geometry as? ARSCNFaceGeometry else {
+//            print("Face Mirror Failed.")
+//            return
+//        }
+//        faceGeometry.update(from: geo)
+//    }
     
 }
