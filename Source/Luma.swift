@@ -50,7 +50,7 @@ class Luma: PIXDelegate, ARMirror {
     }
     
     func didUpdate(arFrame: ARFrame) {
-        
+        let arProjectionMatrix = arFrame.camera.projectionMatrix
     }
     
     func didAdd() {

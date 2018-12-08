@@ -7,17 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		74540AEE21AF4A9A004452E3 /* Pixels3D.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74540AE321AF4A0E004452E3 /* Pixels3D.framework */; };
-		74540AEF21AF4A9A004452E3 /* Pixels3D.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 74540AE321AF4A0E004452E3 /* Pixels3D.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		74540AF321AF4AAE004452E3 /* PixelsShaders.metallib in Resources */ = {isa = PBXBuildFile; fileRef = 74540AF221AF4AAE004452E3 /* PixelsShaders.metallib */; };
-		74540AF521AF4AB2004452E3 /* Pixels3DShaders.metallib in Resources */ = {isa = PBXBuildFile; fileRef = 74540AF421AF4AB1004452E3 /* Pixels3DShaders.metallib */; };
-		74540AFA21AF4AE7004452E3 /* Pixels.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74540AF921AF4AC5004452E3 /* Pixels.framework */; };
-		74540AFB21AF4AE7004452E3 /* Pixels.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 74540AF921AF4AC5004452E3 /* Pixels.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7455A14921A8E0C000679CEB /* AR.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7455A14821A8E0C000679CEB /* AR.swift */; };
 		7457044421A9D236007C3DB9 /* FileAssistant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7457044221A9D236007C3DB9 /* FileAssistant.swift */; };
 		7457044621A9D30F007C3DB9 /* ViewAssistant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7457044521A9D30F007C3DB9 /* ViewAssistant.swift */; };
 		7457044821AACAF1007C3DB9 /* 3D.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 7457044721AACAF1007C3DB9 /* 3D.scnassets */; };
 		7457044A21AACB24007C3DB9 /* Sim.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7457044921AACB24007C3DB9 /* Sim.swift */; };
+		747720DC21B5E0D9007E3C33 /* Pixels3D.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 747720D121B5E050007E3C33 /* Pixels3D.framework */; };
+		747720DD21B5E0D9007E3C33 /* Pixels3D.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 747720D121B5E050007E3C33 /* Pixels3D.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		747720E721B5E118007E3C33 /* PixelsShaders.metallib in Resources */ = {isa = PBXBuildFile; fileRef = 747720E621B5E118007E3C33 /* PixelsShaders.metallib */; };
+		747720E921B5E11C007E3C33 /* Pixels3DShaders.metallib in Resources */ = {isa = PBXBuildFile; fileRef = 747720E821B5E11C007E3C33 /* Pixels3DShaders.metallib */; };
+		747720EB21B5E13B007E3C33 /* Pixels.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 747720EA21B5E13B007E3C33 /* Pixels.framework */; };
+		747720EC21B5E13B007E3C33 /* Pixels.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 747720EA21B5E13B007E3C33 /* Pixels.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		74DB096421A8DD5E00DC061A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74DB096321A8DD5E00DC061A /* AppDelegate.swift */; };
 		74DB096621A8DD5E00DC061A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74DB096521A8DD5E00DC061A /* ViewController.swift */; };
 		74DB096921A8DD5E00DC061A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 74DB096721A8DD5E00DC061A /* Main.storyboard */; };
@@ -29,16 +29,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		74540AE221AF4A0E004452E3 /* PBXContainerItemProxy */ = {
+		747720D021B5E050007E3C33 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 74540ADC21AF4A0D004452E3 /* Pixels3D.xcodeproj */;
+			containerPortal = 747720CA21B5E050007E3C33 /* Pixels3D.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 749ACA6F21138DFF00737173;
 			remoteInfo = Pixels3D;
 		};
-		74540AF021AF4A9A004452E3 /* PBXContainerItemProxy */ = {
+		747720DE21B5E0D9007E3C33 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 74540ADC21AF4A0D004452E3 /* Pixels3D.xcodeproj */;
+			containerPortal = 747720CA21B5E050007E3C33 /* Pixels3D.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = 749ACA6E21138DFF00737173;
 			remoteInfo = Pixels3D;
@@ -52,8 +52,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				74540AEF21AF4A9A004452E3 /* Pixels3D.framework in Embed Frameworks */,
-				74540AFB21AF4AE7004452E3 /* Pixels.framework in Embed Frameworks */,
+				747720DD21B5E0D9007E3C33 /* Pixels3D.framework in Embed Frameworks */,
+				747720EC21B5E13B007E3C33 /* Pixels.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -61,15 +61,16 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		74540ADC21AF4A0D004452E3 /* Pixels3D.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Pixels3D.xcodeproj; path = "../../·pixels/·pixels-3d/··framework/Pixels3D.xcodeproj"; sourceTree = "<group>"; };
-		74540AF221AF4AAE004452E3 /* PixelsShaders.metallib */ = {isa = PBXFileReference; lastKnownFileType = "archive.metal-library"; name = PixelsShaders.metallib; path = "../../../../Library/Developer/Xcode/DerivedData/Luma_Face-hfbxhbtrcimfetaytkdwqfobkwwg/Build/Products/Debug-iphoneos/PixelsShaders.metallib"; sourceTree = "<group>"; };
-		74540AF421AF4AB1004452E3 /* Pixels3DShaders.metallib */ = {isa = PBXFileReference; lastKnownFileType = "archive.metal-library"; name = Pixels3DShaders.metallib; path = "../../../../Library/Developer/Xcode/DerivedData/Luma_Face-hfbxhbtrcimfetaytkdwqfobkwwg/Build/Products/Debug-iphoneos/Pixels3DShaders.metallib"; sourceTree = "<group>"; };
-		74540AF921AF4AC5004452E3 /* Pixels.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pixels.framework; path = "../../../../Library/Developer/Xcode/DerivedData/Luma_Face-hfbxhbtrcimfetaytkdwqfobkwwg/Build/Products/Debug-iphoneos/Pixels.framework"; sourceTree = "<group>"; };
 		7455A14821A8E0C000679CEB /* AR.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AR.swift; sourceTree = "<group>"; };
 		7457044221A9D236007C3DB9 /* FileAssistant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileAssistant.swift; sourceTree = "<group>"; };
 		7457044521A9D30F007C3DB9 /* ViewAssistant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewAssistant.swift; sourceTree = "<group>"; };
 		7457044721AACAF1007C3DB9 /* 3D.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = 3D.scnassets; sourceTree = "<group>"; };
 		7457044921AACB24007C3DB9 /* Sim.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sim.swift; sourceTree = "<group>"; };
+		747720CA21B5E050007E3C33 /* Pixels3D.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Pixels3D.xcodeproj; path = "../../all-of-pixels/all-of-pixels-3d/pixels-3d/Pixels3D.xcodeproj"; sourceTree = "<group>"; };
+		747720E621B5E118007E3C33 /* PixelsShaders.metallib */ = {isa = PBXFileReference; lastKnownFileType = "archive.metal-library"; name = PixelsShaders.metallib; path = "../../../../Library/Developer/Xcode/DerivedData/Luma_Face-applliwxmdyoctgniuwyljkniuhd/Build/Products/Debug-iphoneos/PixelsShaders.metallib"; sourceTree = "<group>"; };
+		747720E821B5E11C007E3C33 /* Pixels3DShaders.metallib */ = {isa = PBXFileReference; lastKnownFileType = "archive.metal-library"; name = Pixels3DShaders.metallib; path = "../../../../Library/Developer/Xcode/DerivedData/Luma_Face-applliwxmdyoctgniuwyljkniuhd/Build/Products/Debug-iphoneos/Pixels3DShaders.metallib"; sourceTree = "<group>"; };
+		747720EA21B5E13B007E3C33 /* Pixels.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pixels.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		747720ED21B5E147007E3C33 /* Pixels.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pixels.framework; path = "../../../../Library/Developer/Xcode/DerivedData/Luma_Face-applliwxmdyoctgniuwyljkniuhd/Build/Products/Debug-iphoneos/Pixels.framework"; sourceTree = "<group>"; };
 		74DB096021A8DD5E00DC061A /* Luma Face.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Luma Face.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		74DB096321A8DD5E00DC061A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		74DB096521A8DD5E00DC061A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -87,40 +88,41 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				74540AEE21AF4A9A004452E3 /* Pixels3D.framework in Frameworks */,
-				74540AFA21AF4AE7004452E3 /* Pixels.framework in Frameworks */,
+				747720DC21B5E0D9007E3C33 /* Pixels3D.framework in Frameworks */,
+				747720EB21B5E13B007E3C33 /* Pixels.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		74540ADD21AF4A0D004452E3 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				74540AE321AF4A0E004452E3 /* Pixels3D.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		7455A15421A8E19500679CEB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				74540AF921AF4AC5004452E3 /* Pixels.framework */,
+				747720ED21B5E147007E3C33 /* Pixels.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		747720CB21B5E050007E3C33 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				747720D121B5E050007E3C33 /* Pixels3D.framework */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		74DB095721A8DD5E00DC061A = {
 			isa = PBXGroup;
 			children = (
 				74DB096221A8DD5E00DC061A /* Source */,
+				747720EA21B5E13B007E3C33 /* Pixels.framework */,
 				74DB097C21A8DF5400DC061A /* Resources */,
-				74540AF421AF4AB1004452E3 /* Pixels3DShaders.metallib */,
-				74540AF221AF4AAE004452E3 /* PixelsShaders.metallib */,
 				74DB096121A8DD5E00DC061A /* Products */,
+				747720E821B5E11C007E3C33 /* Pixels3DShaders.metallib */,
+				747720E621B5E118007E3C33 /* PixelsShaders.metallib */,
 				7455A15421A8E19500679CEB /* Frameworks */,
-				74540ADC21AF4A0D004452E3 /* Pixels3D.xcodeproj */,
+				747720CA21B5E050007E3C33 /* Pixels3D.xcodeproj */,
 			);
 			sourceTree = "<group>";
 		};
@@ -176,7 +178,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				74540AF121AF4A9A004452E3 /* PBXTargetDependency */,
+				747720DF21B5E0D9007E3C33 /* PBXTargetDependency */,
 			);
 			name = "Luma Face";
 			productName = "Luma Face";
@@ -211,8 +213,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 74540ADD21AF4A0D004452E3 /* Products */;
-					ProjectRef = 74540ADC21AF4A0D004452E3 /* Pixels3D.xcodeproj */;
+					ProductGroup = 747720CB21B5E050007E3C33 /* Products */;
+					ProjectRef = 747720CA21B5E050007E3C33 /* Pixels3D.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -223,11 +225,11 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		74540AE321AF4A0E004452E3 /* Pixels3D.framework */ = {
+		747720D121B5E050007E3C33 /* Pixels3D.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = Pixels3D.framework;
-			remoteRef = 74540AE221AF4A0E004452E3 /* PBXContainerItemProxy */;
+			remoteRef = 747720D021B5E050007E3C33 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -237,8 +239,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				74540AF521AF4AB2004452E3 /* Pixels3DShaders.metallib in Resources */,
-				74540AF321AF4AAE004452E3 /* PixelsShaders.metallib in Resources */,
+				747720E721B5E118007E3C33 /* PixelsShaders.metallib in Resources */,
+				747720E921B5E11C007E3C33 /* Pixels3DShaders.metallib in Resources */,
 				74DB097121A8DD5F00DC061A /* LaunchScreen.storyboard in Resources */,
 				7457044821AACAF1007C3DB9 /* 3D.scnassets in Resources */,
 				74DB096E21A8DD5F00DC061A /* Assets.xcassets in Resources */,
@@ -289,10 +291,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		74540AF121AF4A9A004452E3 /* PBXTargetDependency */ = {
+		747720DF21B5E0D9007E3C33 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = Pixels3D;
-			targetProxy = 74540AF021AF4A9A004452E3 /* PBXContainerItemProxy */;
+			targetProxy = 747720DE21B5E0D9007E3C33 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
