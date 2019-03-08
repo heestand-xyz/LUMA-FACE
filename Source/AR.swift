@@ -7,6 +7,7 @@
 //
 
 import ARKit
+import Pixels
 
 protocol ARMirror {
     func activityUpdated(_ active: Bool)
@@ -42,6 +43,7 @@ class AR: NSObject, ARSessionDelegate, ARSCNViewDelegate {
     var isActive: Bool = false
     
     var image: UIImage?
+    var pix: PIX?
     
 //    var image: UIImage?
     
@@ -108,6 +110,26 @@ class AR: NSObject, ARSessionDelegate, ARSCNViewDelegate {
         node!.geometry!.firstMaterial!.fillMode = .fill
         node!.geometry!.firstMaterial!.diffuse.contents = image
         self.image = image
+        self.pix = nil
+    }
+    
+    func addPIXA() {
+        guard node != nil else { return }
+        node!.geometry!.firstMaterial!.fillMode = .fill
+        let noisePix = NoisePIX(res: ._1024)
+        noisePix.zPosition = .live / 10
+        self.pix = noisePix !** 0.25
+        self.image = nil
+    }
+    
+    func addPIXB() {
+        guard node != nil else { return }
+        node!.geometry!.firstMaterial!.fillMode = .fill
+        let noisePix = NoisePIX(res: ._1024)
+        noisePix.octaves = 3
+        noisePix.zPosition = .live / 10
+        self.pix = noisePix._quantize(by: 0.05)._edge()
+        self.image = nil
     }
     
     func removeImage() {
@@ -115,6 +137,7 @@ class AR: NSObject, ARSessionDelegate, ARSCNViewDelegate {
         node!.geometry!.firstMaterial!.fillMode = .lines
         node!.geometry!.firstMaterial!.diffuse.contents = nil
         self.image = nil
+        self.pix = nil
     }
     
     // MARK: ARSessionDelegate
@@ -130,6 +153,9 @@ class AR: NSObject, ARSessionDelegate, ARSCNViewDelegate {
         }
         mirrors.forEach { mirror in
             mirror.didUpdate(arFrame: frame)
+        }
+        if let pix = self.pix {
+            node!.geometry!.firstMaterial!.diffuse.contents = pix.renderedTexture
         }
     }
     
@@ -182,7 +208,9 @@ class AR: NSObject, ARSessionDelegate, ARSCNViewDelegate {
         let faceGeometry = ARSCNFaceGeometry(device: device)
         node = SCNNode(geometry: faceGeometry)
         
-        if let image = self.image {
+        if pix != nil {
+            addPIXA()
+        } else if let image = self.image {
             addImage(image)
         } else {
             removeImage()

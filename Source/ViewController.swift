@@ -159,10 +159,8 @@ class ViewController: UIViewController, ARMirror, PixelsDelegate {
     
     @objc func addFaceMask(longPess: UILongPressGestureRecognizer) {
         guard longPess.state == .began else { return }
-        
         ViewAssistant.shared.alert("Luma Face", "AR\(AR.isSupported ? "" : " not") supported.", actions: [
-            ViewAssistant.AlertAction(title: "Load Texture", style: .default, handeler: { _ in
-                
+            ViewAssistant.AlertAction(title: "Load Image Texture", style: .default, handeler: { _ in
                 FileAssistant.shared.media_picker_assistant.pickMedia(media_type: .photo, pickedImage: { image in
                     DispatchQueue.main.async {
                         if AR.isSupported {
@@ -172,7 +170,16 @@ class ViewController: UIViewController, ARMirror, PixelsDelegate {
                         }
                     }
                 })
-                
+            }),
+            ViewAssistant.AlertAction(title: "Load PIX A Texture", style: .default, handeler: { _ in
+                if AR.isSupported {
+                    self.ar!.addPIXA()
+                }
+            }),
+            ViewAssistant.AlertAction(title: "Load PIX B Texture", style: .default, handeler: { _ in
+                if AR.isSupported {
+                    self.ar!.addPIXB()
+                }
             }),
             ViewAssistant.AlertAction(title: "Remove Texture", style: .destructive, handeler: { _ in
                 if AR.isSupported {
@@ -185,7 +192,6 @@ class ViewController: UIViewController, ARMirror, PixelsDelegate {
                 self.resetMask()
             })
         ])
-        
     }
     
     @objc func zoomFaceMask(pinch: UIPinchGestureRecognizer) {
