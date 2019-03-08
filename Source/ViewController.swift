@@ -11,7 +11,7 @@ import Pixels
 
 class ViewController: UIViewController, ARMirror, PixelsDelegate {
     
-    var luma: Luma!
+//    var luma: Luma!
     
     var ar: AR?
 //    var face: Face?
@@ -42,7 +42,7 @@ class ViewController: UIViewController, ARMirror, PixelsDelegate {
         
         Pixels.main.delegate = self
         
-        luma = Luma(frame: view.bounds)
+//        luma = Luma(frame: view.bounds)
         
         if AR.isSupported {
             ar = AR(frame: view.bounds)
@@ -56,15 +56,15 @@ class ViewController: UIViewController, ARMirror, PixelsDelegate {
         
         
         if AR.isSupported {
-            ar!.mirrors = [self, luma]
-            ar!.view.alpha = 0
+            ar!.mirrors = [self/*, luma*/]
+//            ar!.view.alpha = 0
             view.addSubview(ar!.view)
         } else {
             view.addSubview(sim!.view)
         }
         
-        luma.view.alpha = 0.1
-        view.addSubview(luma.view)
+//        luma.view.alpha = 0.1
+//        view.addSubview(luma.view)
         
         let longPress = UILongPressGestureRecognizer(target: self, action: #selector(addFaceMask))
         view.addGestureRecognizer(longPress)
@@ -137,13 +137,13 @@ class ViewController: UIViewController, ARMirror, PixelsDelegate {
     
     func activityUpdated(_ active: Bool) {
         indiTopLeftView.backgroundColor = active ? .white : UIColor(white: 0.1, alpha: 1.0)
-        UIView.animate(withDuration: 0.5, animations: {
-            self.luma.view.alpha = active ? 1.0 : 0.1
-        }) { _ in
-            if !active {
-                self.luma.clear()
-            }
-        }
+//        UIView.animate(withDuration: 0.5, animations: {
+//            self.luma.view.alpha = active ? 1.0 : 0.1
+//        }) { _ in
+//            if !active {
+//                self.luma.clear()
+//            }
+//        }
     }
     
     func didUpdate(arFrame: ARFrame) {}

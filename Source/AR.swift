@@ -41,6 +41,8 @@ class AR: NSObject, ARSessionDelegate, ARSCNViewDelegate {
     }
     var isActive: Bool = false
     
+    var image: UIImage?
+    
 //    var image: UIImage?
     
 //    var faceAnchor: ARFaceAnchor?
@@ -105,12 +107,14 @@ class AR: NSObject, ARSessionDelegate, ARSCNViewDelegate {
         guard node != nil else { return }
         node!.geometry!.firstMaterial!.fillMode = .fill
         node!.geometry!.firstMaterial!.diffuse.contents = image
+        self.image = image
     }
     
     func removeImage() {
         guard node != nil else { return }
         node!.geometry!.firstMaterial!.fillMode = .lines
         node!.geometry!.firstMaterial!.diffuse.contents = nil
+        self.image = nil
     }
     
     // MARK: ARSessionDelegate
@@ -177,7 +181,12 @@ class AR: NSObject, ARSessionDelegate, ARSCNViewDelegate {
         
         let faceGeometry = ARSCNFaceGeometry(device: device)
         node = SCNNode(geometry: faceGeometry)
-        node!.geometry!.firstMaterial!.fillMode = .lines
+        
+        if let image = self.image {
+            addImage(image)
+        } else {
+            removeImage()
+        }
         
         
         return node
