@@ -17,7 +17,7 @@ protocol ARMirror {
     func didRemove()
 }
 
-class AR: NSObject, ARSessionDelegate, ARSCNViewDelegate {
+class AR: NSObject, ARSessionDelegate, ARSCNViewDelegate, ContentDelegate {
     
     var mirrors: [ARMirror] = []
     
@@ -44,6 +44,7 @@ class AR: NSObject, ARSessionDelegate, ARSCNViewDelegate {
     
     var image: UIImage?
     var pix: PIX?
+    var content: Bool = true
     
 //    var image: UIImage?
     
@@ -103,6 +104,23 @@ class AR: NSObject, ARSessionDelegate, ARSCNViewDelegate {
     
     func pause() {
         session.pause()
+    }
+    
+//    func add(content: Any) {
+//        guard node != nil else { return }
+//        node!.geometry!.firstMaterial!.fillMode = .fill
+//        node!.geometry!.firstMaterial!.diffuse.contents = content
+//        self.image = nil
+//        self.pix = nil
+//    }
+    
+    func new(texture: MTLTexture) {
+        node?.geometry!.firstMaterial!.fillMode = .fill
+        node?.geometry!.firstMaterial!.diffuse.contents = texture
+    }
+    func new(image: UIImage) {
+//        node!.geometry!.firstMaterial!.fillMode = .fill
+//        node?.geometry!.firstMaterial!.diffuse.contents = image
     }
     
     func addImage(_ image: UIImage) {

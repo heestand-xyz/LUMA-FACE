@@ -11,6 +11,8 @@ import Pixels
 
 class ViewController: UIViewController, ARMirror, PixelsDelegate {
     
+    var content: Content!
+    
 //    var luma: Luma!
     
     var ar: AR?
@@ -30,6 +32,10 @@ class ViewController: UIViewController, ARMirror, PixelsDelegate {
     
     var fpsLabel: UILabel!
     
+    var rBtn: UIButton!
+    var gBtn: UIButton!
+    var bBtn: UIButton!
+    
     override var prefersStatusBarHidden: Bool {
         return true
     }
@@ -42,13 +48,17 @@ class ViewController: UIViewController, ARMirror, PixelsDelegate {
         
         Pixels.main.delegate = self
         
+        content = Content()
+        
 //        luma = Luma(frame: view.bounds)
         
         if AR.isSupported {
             ar = AR(frame: view.bounds)
 //            face = Face(frame: view.bounds)
+            content.delegate = ar
         } else {
             sim = Sim(frame: view.bounds)
+            content.delegate = sim
         }
         
         
@@ -103,6 +113,22 @@ class ViewController: UIViewController, ARMirror, PixelsDelegate {
         fpsLabel.font = UIFont.monospacedDigitSystemFont(ofSize: 15, weight: .heavy)
         view.addSubview(fpsLabel)
         
+        rBtn = UIButton()
+        rBtn.backgroundColor = .red
+        rBtn.tag = 1
+        rBtn.addTarget(self, action: #selector(rgbOnOff), for: .touchUpInside)
+        view.addSubview(rBtn)
+        gBtn = UIButton()
+        gBtn.backgroundColor = .green
+        gBtn.tag = 2
+        gBtn.addTarget(self, action: #selector(rgbOnOff), for: .touchUpInside)
+        view.addSubview(gBtn)
+        bBtn = UIButton()
+        bBtn.backgroundColor = .blue
+        bBtn.tag = 3
+        bBtn.addTarget(self, action: #selector(rgbOnOff), for: .touchUpInside)
+        view.addSubview(bBtn)
+        
         NotificationCenter.default.addObserver(self, selector: #selector(appWillEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(batteryLevelDidChange), name: UIDevice.batteryLevelDidChangeNotification, object: nil)
         
@@ -118,6 +144,25 @@ class ViewController: UIViewController, ARMirror, PixelsDelegate {
         if AR.isSupported {
             ar!.run()
         }
+        
+        rBtn.translatesAutoresizingMaskIntoConstraints = false
+        rBtn.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        rBtn.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: -30).isActive = true
+        rBtn.widthAnchor.constraint(equalToConstant: 30).isActive = true
+        rBtn.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        
+        gBtn.translatesAutoresizingMaskIntoConstraints = false
+        gBtn.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        gBtn.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0).isActive = true
+        gBtn.widthAnchor.constraint(equalToConstant: 30).isActive = true
+        gBtn.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        
+        bBtn.translatesAutoresizingMaskIntoConstraints = false
+        bBtn.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        bBtn.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 30).isActive = true
+        bBtn.widthAnchor.constraint(equalToConstant: 30).isActive = true
+        bBtn.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -154,41 +199,59 @@ class ViewController: UIViewController, ARMirror, PixelsDelegate {
     
     func didRemove() {}
     
+    // MARK: RGB
+    
+    @objc func rgbOnOff(btn: UIButton) {
+        btn.tag = -btn.tag
+        let r = rBtn.tag > 0 ? 1 : 0
+        let g = gBtn.tag > 0 ? 1 : 0
+        let b = bBtn.tag > 0 ? 1 : 0
+        btn.alpha = btn.tag > 0 ? 1.0 : 1 / 3
+        let c = LiveColor(r: LiveFloat(r), g: LiveFloat(g), b: LiveFloat(b))
+        content.mult(color: c)
+    }
     
     // MARK: Face Mask
     
     @objc func addFaceMask(longPess: UILongPressGestureRecognizer) {
         guard longPess.state == .began else { return }
         ViewAssistant.shared.alert("Luma Face", "AR\(AR.isSupported ? "" : " not") supported.", actions: [
+            ViewAssistant.AlertAction(title: "Next Image", style: .default, handeler: { _ in
+                self.content.loadNextImage()
+            }),
+//            ViewAssistant.AlertAction(title: "Next Video", style: .default, handeler: { _ in
+//                self.content.loadNextVideo()
+//            }),
             ViewAssistant.AlertAction(title: "Load Image Texture", style: .default, handeler: { _ in
                 FileAssistant.shared.media_picker_assistant.pickMedia(media_type: .photo, pickedImage: { image in
                     DispatchQueue.main.async {
-                        if AR.isSupported {
-                            self.ar!.addImage(image)
-                        } else {
-                            self.sim!.addImage(image)
-                        }
+//                        if AR.isSupported {
+//                            self.ar!.addImage(image)
+//                        } else {
+//                            self.sim!.addImage(image)
+//                        }
+                        self.content.loadExternal(image: image)
                     }
                 })
             }),
-            ViewAssistant.AlertAction(title: "Load PIX A Texture", style: .default, handeler: { _ in
-                if AR.isSupported {
-                    self.ar!.addPIXA()
-                }
-            }),
-            ViewAssistant.AlertAction(title: "Load PIX B Texture", style: .default, handeler: { _ in
-                if AR.isSupported {
-                    self.ar!.addPIXB()
-                }
-            }),
-            ViewAssistant.AlertAction(title: "Remove Texture", style: .destructive, handeler: { _ in
-                if AR.isSupported {
-                    self.ar!.removeImage()
-                } else {
-                    self.sim!.removeImage()
-                }
-            }),
-            ViewAssistant.AlertAction(title: "Reset  Transform", style: .destructive, handeler: { _ in
+//            ViewAssistant.AlertAction(title: "Load PIX A Texture", style: .default, handeler: { _ in
+//                if AR.isSupported {
+//                    self.ar!.addPIXA()
+//                }
+//            }),
+//            ViewAssistant.AlertAction(title: "Load PIX B Texture", style: .default, handeler: { _ in
+//                if AR.isSupported {
+//                    self.ar!.addPIXB()
+//                }
+//            }),
+//            ViewAssistant.AlertAction(title: "Remove Texture", style: .destructive, handeler: { _ in
+//                if AR.isSupported {
+//                    self.ar!.removeImage()
+//                } else {
+//                    self.sim!.removeImage()
+//                }
+//            }),
+            ViewAssistant.AlertAction(title: "Reset Transform", style: .destructive, handeler: { _ in
                 self.resetMask()
             })
         ])

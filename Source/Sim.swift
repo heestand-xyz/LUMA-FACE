@@ -8,7 +8,7 @@
 
 import SceneKit
 
-class Sim {
+class Sim: ContentDelegate {
     
     let scene: SCNScene
     let view: SCNView
@@ -19,14 +19,15 @@ class Sim {
         
         scene = SCNScene()
         view = SCNView(frame: frame)
+//        view.autoenablesDefaultLighting = true
         
-        
+
         view.allowsCameraControl = true
         view.backgroundColor = .black
         view.scene = scene
         
         load()
-        
+                
     }
     
     func load() {
@@ -37,22 +38,37 @@ class Sim {
             fatalError("root not found")
         }
         node = _3d.rootNode.childNodes[0]
-        node.geometry!.firstMaterial!.fillMode = .lines
+//        node.geometry!.firstMaterial!.isDoubleSided = true
+//        node.geometry!.firstMaterial!.emission.contents = UIColor.white
+//        node.geometry!.firstMaterial!.fillMode = .lines
         scene.rootNode.addChildNode(node)
     }
+    
+//    func addContent() {
+//        node.geometry!.firstMaterial!.fillMode = .fill
+//        node.geometry!.firstMaterial!.diffuse.contents = Content.shared.finalPix.renderedTexture
+//        node.geometry!.firstMaterial!.emission.contents = UIColor.black
+//    }
     
     func addImage(_ image: UIImage) {
         node.geometry!.firstMaterial!.fillMode = .fill
 //        guard let cgImage = image.cgImage else { print("bad img"); return }
 //        let flippedImage = UIImage(cgImage: cgImage, scale: image.scale, orientation: .up)
         let flippedImage = Luma.flipImage(image)
-        self.node.geometry!.firstMaterial!.diffuse.contents = flippedImage
+        node.geometry!.firstMaterial!.emission.contents = flippedImage
 //        Luma.light.flipY(image: image) { pixImage in }
     }
     
     func removeImage() {
         node.geometry!.firstMaterial!.fillMode = .lines
-        node.geometry!.firstMaterial!.diffuse.contents = nil
+        node.geometry!.firstMaterial!.emission.contents = nil
+    }
+    
+    func new(texture: MTLTexture) {
+//        node.geometry!.firstMaterial!.emission.contents = texture
+    }
+    func new(image: UIImage) {
+        node.geometry!.firstMaterial!.emission.contents = image
     }
     
 }
