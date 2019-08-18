@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		150C004B8A47DA3BECAEF73F /* Pods_Luma_Browser.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08C8A952A55AF14CD41B099B /* Pods_Luma_Browser.framework */; };
 		7411B51C22A1920300F861BD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7411B51B22A1920300F861BD /* AppDelegate.swift */; };
 		7411B51E22A1920300F861BD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7411B51D22A1920300F861BD /* ViewController.swift */; };
 		7411B52122A1920300F861BD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7411B51F22A1920300F861BD /* Main.storyboard */; };
@@ -40,6 +41,10 @@
 		7411B55622A1B3A400F861BD /* IMG_0025.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7411B53D22A1B3A400F861BD /* IMG_0025.jpg */; };
 		7411B55722A1B3A400F861BD /* IMG_0025.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7411B53D22A1B3A400F861BD /* IMG_0025.jpg */; };
 		7411B55822A1B61300F861BD /* 3D.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 7457044721AACAF1007C3DB9 /* 3D.scnassets */; };
+		7429DDB122FD6D2C00ED472D /* LFOSCClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7429DDB022FD6D2B00ED472D /* LFOSCClient.swift */; };
+		7429DDB222FD6D2C00ED472D /* LFOSCClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7429DDB022FD6D2B00ED472D /* LFOSCClient.swift */; };
+		7429DDB422FD712000ED472D /* LiveCamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7429DDB322FD712000ED472D /* LiveCamView.swift */; };
+		7429DDB522FD712000ED472D /* LiveCamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7429DDB322FD712000ED472D /* LiveCamView.swift */; };
 		74552D672243C36B00D02E15 /* Content.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74552D662243C36B00D02E15 /* Content.swift */; };
 		74552DA32243CA6F00D02E15 /* lines.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 74552D962243CA6F00D02E15 /* lines.mp4 */; };
 		7455A14921A8E0C000679CEB /* AR.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7455A14821A8E0C000679CEB /* AR.swift */; };
@@ -47,12 +52,12 @@
 		7457044621A9D30F007C3DB9 /* ViewAssistant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7457044521A9D30F007C3DB9 /* ViewAssistant.swift */; };
 		7457044821AACAF1007C3DB9 /* 3D.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 7457044721AACAF1007C3DB9 /* 3D.scnassets */; };
 		7457044A21AACB24007C3DB9 /* Sim.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7457044921AACB24007C3DB9 /* Sim.swift */; };
-		745D090721F6439F0096B917 /* Pixels3D.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 745D090221F643850096B917 /* Pixels3D.framework */; };
-		745D090821F6439F0096B917 /* Pixels3D.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 745D090221F643850096B917 /* Pixels3D.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		745D090C21F643A60096B917 /* Pixels.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 745D090B21F643A60096B917 /* Pixels.framework */; };
-		745D090D21F643A60096B917 /* Pixels.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 745D090B21F643A60096B917 /* Pixels.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		745D090F21F643B20096B917 /* PixelsShaders.metallib in Resources */ = {isa = PBXBuildFile; fileRef = 745D090E21F643B20096B917 /* PixelsShaders.metallib */; };
-		745D091121F643B60096B917 /* Pixels3DShaders.metallib in Resources */ = {isa = PBXBuildFile; fileRef = 745D091021F643B50096B917 /* Pixels3DShaders.metallib */; };
+		748F67E922C8E74C003A64A9 /* FileLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748F67E822C8E74C003A64A9 /* FileLoader.swift */; };
+		748F67EA22C8E74C003A64A9 /* FileLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748F67E822C8E74C003A64A9 /* FileLoader.swift */; };
+		748F67EE22C8E8EB003A64A9 /* LFOSCServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748F67ED22C8E8EB003A64A9 /* LFOSCServer.swift */; };
+		748F67EF22C8E8EB003A64A9 /* LFOSCServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748F67ED22C8E8EB003A64A9 /* LFOSCServer.swift */; };
+		74CF071A22C93F9D00FBEEDF /* LFIP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CF071922C93F9D00FBEEDF /* LFIP.swift */; };
+		74CF071B22C93F9D00FBEEDF /* LFIP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CF071922C93F9D00FBEEDF /* LFIP.swift */; };
 		74DB096421A8DD5E00DC061A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74DB096321A8DD5E00DC061A /* AppDelegate.swift */; };
 		74DB096621A8DD5E00DC061A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74DB096521A8DD5E00DC061A /* ViewController.swift */; };
 		74DB096921A8DD5E00DC061A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 74DB096721A8DD5E00DC061A /* Main.storyboard */; };
@@ -63,24 +68,8 @@
 		74DB097B21A8DECE00DC061A /* Face.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74DB097A21A8DECE00DC061A /* Face.swift */; };
 		74FABD772244013A00E96B60 /* skiss1.mov in Resources */ = {isa = PBXBuildFile; fileRef = 74FABD762244013A00E96B60 /* skiss1.mov */; };
 		74FABD79224401AD00E96B60 /* screen.mov in Resources */ = {isa = PBXBuildFile; fileRef = 74FABD78224401AD00E96B60 /* screen.mov */; };
+		D02B8ACE3AEFCEC0954F0B86 /* Pods_Luma_Face.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F9766BB092F7F83D6A4DEB1 /* Pods_Luma_Face.framework */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		745D090121F643850096B917 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 745D08FA21F643840096B917 /* Pixels3D.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 749ACA6F21138DFF00737173;
-			remoteInfo = Pixels3D;
-		};
-		745D090921F6439F0096B917 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 745D08FA21F643840096B917 /* Pixels3D.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 749ACA6E21138DFF00737173;
-			remoteInfo = Pixels3D;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		745D090621F6439C0096B917 /* Embed Frameworks */ = {
@@ -89,8 +78,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				745D090821F6439F0096B917 /* Pixels3D.framework in Embed Frameworks */,
-				745D090D21F643A60096B917 /* Pixels.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -98,6 +85,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		08C8A952A55AF14CD41B099B /* Pods_Luma_Browser.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Luma_Browser.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2D705D7D1B41E6FB06DA6FD5 /* Pods-Luma Browser.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Luma Browser.debug.xcconfig"; path = "Target Support Files/Pods-Luma Browser/Pods-Luma Browser.debug.xcconfig"; sourceTree = "<group>"; };
+		6F9766BB092F7F83D6A4DEB1 /* Pods_Luma_Face.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Luma_Face.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7411B51922A1920300F861BD /* Luma Browser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Luma Browser.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7411B51B22A1920300F861BD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7411B51D22A1920300F861BD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -119,6 +109,8 @@
 		7411B53B22A1B3A400F861BD /* MASTER-1_00000.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "MASTER-1_00000.jpg"; sourceTree = "<group>"; };
 		7411B53C22A1B3A400F861BD /* with_glow_00000.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = with_glow_00000.jpg; sourceTree = "<group>"; };
 		7411B53D22A1B3A400F861BD /* IMG_0025.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = IMG_0025.jpg; sourceTree = "<group>"; };
+		7429DDB022FD6D2B00ED472D /* LFOSCClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LFOSCClient.swift; sourceTree = "<group>"; };
+		7429DDB322FD712000ED472D /* LiveCamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveCamView.swift; sourceTree = "<group>"; };
 		74552D662243C36B00D02E15 /* Content.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Content.swift; sourceTree = "<group>"; };
 		74552D962243CA6F00D02E15 /* lines.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = lines.mp4; sourceTree = "<group>"; };
 		7455A14821A8E0C000679CEB /* AR.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AR.swift; sourceTree = "<group>"; };
@@ -126,11 +118,9 @@
 		7457044521A9D30F007C3DB9 /* ViewAssistant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewAssistant.swift; sourceTree = "<group>"; };
 		7457044721AACAF1007C3DB9 /* 3D.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = 3D.scnassets; sourceTree = "<group>"; };
 		7457044921AACB24007C3DB9 /* Sim.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sim.swift; sourceTree = "<group>"; };
-		745D08FA21F643840096B917 /* Pixels3D.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Pixels3D.xcodeproj; path = "../../all-of-pixels-3d/pixels-3d/Pixels3D.xcodeproj"; sourceTree = "<group>"; };
-		745D090B21F643A60096B917 /* Pixels.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pixels.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		745D090E21F643B20096B917 /* PixelsShaders.metallib */ = {isa = PBXFileReference; lastKnownFileType = "archive.metal-library"; name = PixelsShaders.metallib; path = "../../../../../Library/Developer/Xcode/DerivedData/Luma_Face-ghkraiuddwtpdubqbyhevaeanzig/Build/Products/Debug-iphoneos/PixelsShaders.metallib"; sourceTree = "<group>"; };
-		745D091021F643B50096B917 /* Pixels3DShaders.metallib */ = {isa = PBXFileReference; lastKnownFileType = "archive.metal-library"; name = Pixels3DShaders.metallib; path = "../../../../../Library/Developer/Xcode/DerivedData/Luma_Face-ghkraiuddwtpdubqbyhevaeanzig/Build/Products/Debug-iphoneos/Pixels3DShaders.metallib"; sourceTree = "<group>"; };
-		747720ED21B5E147007E3C33 /* Pixels.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pixels.framework; path = "../../../../Library/Developer/Xcode/DerivedData/Luma_Face-applliwxmdyoctgniuwyljkniuhd/Build/Products/Debug-iphoneos/Pixels.framework"; sourceTree = "<group>"; };
+		748F67E822C8E74C003A64A9 /* FileLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileLoader.swift; sourceTree = "<group>"; };
+		748F67ED22C8E8EB003A64A9 /* LFOSCServer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LFOSCServer.swift; sourceTree = "<group>"; };
+		74CF071922C93F9D00FBEEDF /* LFIP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LFIP.swift; sourceTree = "<group>"; };
 		74DB096021A8DD5E00DC061A /* Luma Face.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Luma Face.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		74DB096321A8DD5E00DC061A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		74DB096521A8DD5E00DC061A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -143,6 +133,9 @@
 		74DB097A21A8DECE00DC061A /* Face.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Face.swift; sourceTree = "<group>"; };
 		74FABD762244013A00E96B60 /* skiss1.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = skiss1.mov; sourceTree = "<group>"; };
 		74FABD78224401AD00E96B60 /* screen.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = screen.mov; sourceTree = "<group>"; };
+		7C9F71AA8678057DAFA051CE /* Pods-Luma Face.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Luma Face.release.xcconfig"; path = "Target Support Files/Pods-Luma Face/Pods-Luma Face.release.xcconfig"; sourceTree = "<group>"; };
+		93A3AF8CB9DBD226021FC41A /* Pods-Luma Browser.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Luma Browser.release.xcconfig"; path = "Target Support Files/Pods-Luma Browser/Pods-Luma Browser.release.xcconfig"; sourceTree = "<group>"; };
+		B74F44E050A2FB6F4DFE765E /* Pods-Luma Face.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Luma Face.debug.xcconfig"; path = "Target Support Files/Pods-Luma Face/Pods-Luma Face.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +143,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				150C004B8A47DA3BECAEF73F /* Pods_Luma_Browser.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -157,14 +151,24 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				745D090721F6439F0096B917 /* Pixels3D.framework in Frameworks */,
-				745D090C21F643A60096B917 /* Pixels.framework in Frameworks */,
+				D02B8ACE3AEFCEC0954F0B86 /* Pods_Luma_Face.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0C76AA50EE81CC9DD6069746 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				2D705D7D1B41E6FB06DA6FD5 /* Pods-Luma Browser.debug.xcconfig */,
+				93A3AF8CB9DBD226021FC41A /* Pods-Luma Browser.release.xcconfig */,
+				B74F44E050A2FB6F4DFE765E /* Pods-Luma Face.debug.xcconfig */,
+				7C9F71AA8678057DAFA051CE /* Pods-Luma Face.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		7411B51A22A1920300F861BD /* Luma Browser */ = {
 			isa = PBXGroup;
 			children = (
@@ -180,6 +184,7 @@
 				7411B51B22A1920300F861BD /* AppDelegate.swift */,
 				7411B51D22A1920300F861BD /* ViewController.swift */,
 				7411B52E22A1926100F861BD /* LumaBrowseView.swift */,
+				7429DDB322FD712000ED472D /* LiveCamView.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -246,30 +251,50 @@
 		7455A15421A8E19500679CEB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				747720ED21B5E147007E3C33 /* Pixels.framework */,
+				08C8A952A55AF14CD41B099B /* Pods_Luma_Browser.framework */,
+				6F9766BB092F7F83D6A4DEB1 /* Pods_Luma_Face.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		745D08FB21F643840096B917 /* Products */ = {
+		748F67E622C8E68E003A64A9 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				745D090221F643850096B917 /* Pixels3D.framework */,
+				748F67EB22C8E77C003A64A9 /* Source */,
+				748F67EC22C8E782003A64A9 /* Resources */,
 			);
-			name = Products;
+			path = Common;
+			sourceTree = "<group>";
+		};
+		748F67EB22C8E77C003A64A9 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				748F67E822C8E74C003A64A9 /* FileLoader.swift */,
+				748F67ED22C8E8EB003A64A9 /* LFOSCServer.swift */,
+				7429DDB022FD6D2B00ED472D /* LFOSCClient.swift */,
+				74CF071922C93F9D00FBEEDF /* LFIP.swift */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		748F67EC22C8E782003A64A9 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				7457044721AACAF1007C3DB9 /* 3D.scnassets */,
+				74552DA42243CB4100D02E15 /* Content */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		74DB095721A8DD5E00DC061A = {
 			isa = PBXGroup;
 			children = (
+				748F67E622C8E68E003A64A9 /* Common */,
 				7411B52D22A1922400F861BD /* Luma Face */,
 				7411B51A22A1920300F861BD /* Luma Browser */,
-				745D091021F643B50096B917 /* Pixels3DShaders.metallib */,
-				745D090E21F643B20096B917 /* PixelsShaders.metallib */,
-				745D090B21F643A60096B917 /* Pixels.framework */,
 				74DB096121A8DD5E00DC061A /* Products */,
 				7455A15421A8E19500679CEB /* Frameworks */,
-				745D08FA21F643840096B917 /* Pixels3D.xcodeproj */,
+				0C76AA50EE81CC9DD6069746 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -302,12 +327,10 @@
 			isa = PBXGroup;
 			children = (
 				74DB096721A8DD5E00DC061A /* Main.storyboard */,
-				74552DA42243CB4100D02E15 /* Content */,
 				74DB096D21A8DD5F00DC061A /* Assets.xcassets */,
 				74DB096F21A8DD5F00DC061A /* LaunchScreen.storyboard */,
 				74DB097221A8DD5F00DC061A /* Info.plist */,
 				74DB096A21A8DD5E00DC061A /* Luma_Face.xcdatamodeld */,
-				7457044721AACAF1007C3DB9 /* 3D.scnassets */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -319,9 +342,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7411B52A22A1920400F861BD /* Build configuration list for PBXNativeTarget "Luma Browser" */;
 			buildPhases = (
+				6F72B554D58F8C933315BE07 /* [CP] Check Pods Manifest.lock */,
 				7411B51522A1920300F861BD /* Sources */,
 				7411B51622A1920300F861BD /* Frameworks */,
 				7411B51722A1920300F861BD /* Resources */,
+				C58F9045163751C13D9B0554 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -336,16 +361,17 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 74DB097521A8DD5F00DC061A /* Build configuration list for PBXNativeTarget "Luma Face" */;
 			buildPhases = (
+				D180F9E361A967016D97618D /* [CP] Check Pods Manifest.lock */,
 				74DB095C21A8DD5E00DC061A /* Sources */,
 				74DB095D21A8DD5E00DC061A /* Frameworks */,
 				74DB095E21A8DD5E00DC061A /* Resources */,
 				7455A14721A8E07E00679CEB /* Build Number */,
 				745D090621F6439C0096B917 /* Embed Frameworks */,
+				991D64A02C3E5DD2B4DD0C9D /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				745D090A21F6439F0096B917 /* PBXTargetDependency */,
 			);
 			name = "Luma Face";
 			productName = "Luma Face";
@@ -381,12 +407,6 @@
 			mainGroup = 74DB095721A8DD5E00DC061A;
 			productRefGroup = 74DB096121A8DD5E00DC061A /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 745D08FB21F643840096B917 /* Products */;
-					ProjectRef = 745D08FA21F643840096B917 /* Pixels3D.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				74DB095F21A8DD5E00DC061A /* Luma Face */,
@@ -394,16 +414,6 @@
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		745D090221F643850096B917 /* Pixels3D.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = Pixels3D.framework;
-			remoteRef = 745D090121F643850096B917 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		7411B51722A1920300F861BD /* Resources */ = {
@@ -437,12 +447,10 @@
 				74FABD772244013A00E96B60 /* skiss1.mov in Resources */,
 				7411B54822A1B3A400F861BD /* IMG_0069.jpg in Resources */,
 				7411B55222A1B3A400F861BD /* MASTER-1_00000.jpg in Resources */,
-				745D090F21F643B20096B917 /* PixelsShaders.metallib in Resources */,
 				74FABD79224401AD00E96B60 /* screen.mov in Resources */,
 				7411B54622A1B3A400F861BD /* test_fade.jpg in Resources */,
 				7411B54422A1B3A400F861BD /* test.jpg in Resources */,
 				7411B53E22A1B3A400F861BD /* MASTER-2_00000.png in Resources */,
-				745D091121F643B60096B917 /* Pixels3DShaders.metallib in Resources */,
 				7411B55022A1B3A400F861BD /* test_2.jpg in Resources */,
 				74DB097121A8DD5F00DC061A /* LaunchScreen.storyboard in Resources */,
 				7411B54C22A1B3A400F861BD /* test_3.jpg in Resources */,
@@ -462,6 +470,28 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		6F72B554D58F8C933315BE07 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Luma Browser-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		7455A14721A8E07E00679CEB /* Build Number */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -480,6 +510,62 @@
 			shellPath = /bin/sh;
 			shellScript = "buildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${INFOPLIST_FILE}\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${INFOPLIST_FILE}\"\n";
 		};
+		991D64A02C3E5DD2B4DD0C9D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Luma Face/Pods-Luma Face-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Luma Face/Pods-Luma Face-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Luma Face/Pods-Luma Face-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C58F9045163751C13D9B0554 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Luma Browser/Pods-Luma Browser-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Luma Browser/Pods-Luma Browser-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Luma Browser/Pods-Luma Browser-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D180F9E361A967016D97618D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Luma Face-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -487,9 +573,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7429DDB522FD712000ED472D /* LiveCamView.swift in Sources */,
 				7411B51E22A1920300F861BD /* ViewController.swift in Sources */,
+				7429DDB222FD6D2C00ED472D /* LFOSCClient.swift in Sources */,
+				74CF071B22C93F9D00FBEEDF /* LFIP.swift in Sources */,
 				7411B51C22A1920300F861BD /* AppDelegate.swift in Sources */,
+				748F67EA22C8E74C003A64A9 /* FileLoader.swift in Sources */,
 				7411B52F22A1926100F861BD /* LumaBrowseView.swift in Sources */,
+				748F67EF22C8E8EB003A64A9 /* LFOSCServer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -499,26 +590,23 @@
 			files = (
 				74DB096621A8DD5E00DC061A /* ViewController.swift in Sources */,
 				74DB096C21A8DD5E00DC061A /* Luma_Face.xcdatamodeld in Sources */,
+				74CF071A22C93F9D00FBEEDF /* LFIP.swift in Sources */,
 				7457044A21AACB24007C3DB9 /* Sim.swift in Sources */,
+				7429DDB422FD712000ED472D /* LiveCamView.swift in Sources */,
+				748F67E922C8E74C003A64A9 /* FileLoader.swift in Sources */,
 				74552D672243C36B00D02E15 /* Content.swift in Sources */,
 				7455A14921A8E0C000679CEB /* AR.swift in Sources */,
 				7457044621A9D30F007C3DB9 /* ViewAssistant.swift in Sources */,
+				7429DDB122FD6D2C00ED472D /* LFOSCClient.swift in Sources */,
 				74DB097B21A8DECE00DC061A /* Face.swift in Sources */,
 				74DB096421A8DD5E00DC061A /* AppDelegate.swift in Sources */,
+				748F67EE22C8E8EB003A64A9 /* LFOSCServer.swift in Sources */,
 				74DB097921A8DE9D00DC061A /* Luma.swift in Sources */,
 				7457044421A9D236007C3DB9 /* FileAssistant.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		745D090A21F6439F0096B917 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = Pixels3D;
-			targetProxy = 745D090921F6439F0096B917 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		7411B51F22A1920300F861BD /* Main.storyboard */ = {
@@ -558,6 +646,7 @@
 /* Begin XCBuildConfiguration section */
 		7411B52822A1920400F861BD /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2D705D7D1B41E6FB06DA6FD5 /* Pods-Luma Browser.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -577,6 +666,7 @@
 		};
 		7411B52922A1920400F861BD /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 93A3AF8CB9DBD226021FC41A /* Pods-Luma Browser.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -712,6 +802,7 @@
 		};
 		74DB097621A8DD5F00DC061A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B74F44E050A2FB6F4DFE765E /* Pods-Luma Face.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -732,6 +823,7 @@
 		};
 		74DB097721A8DD5F00DC061A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7C9F71AA8678057DAFA051CE /* Pods-Luma Face.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;

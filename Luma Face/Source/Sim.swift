@@ -15,18 +15,21 @@ class Sim: ContentDelegate {
     
     var node: SCNNode!
     
+    var wireframe: Bool = false
+    
     init(frame: CGRect) {
         
         scene = SCNScene()
         view = SCNView(frame: frame)
-//        view.autoenablesDefaultLighting = true
-        
+        view.autoenablesDefaultLighting = true
 
         view.allowsCameraControl = true
         view.backgroundColor = .black
         view.scene = scene
         
         load()
+        
+        wireframeOn()
                 
     }
     
@@ -39,6 +42,8 @@ class Sim: ContentDelegate {
         }
         node = _3d.rootNode.childNodes[0]
 //        node.geometry!.firstMaterial!.isDoubleSided = true
+//        node.scale = SCNVector3(1000, 1000, 1000)
+//        node.geometry!.firstMaterial!.isDoubleSided = true
 //        node.geometry!.firstMaterial!.emission.contents = UIColor.white
 //        node.geometry!.firstMaterial!.fillMode = .lines
         scene.rootNode.addChildNode(node)
@@ -50,25 +55,37 @@ class Sim: ContentDelegate {
 //        node.geometry!.firstMaterial!.emission.contents = UIColor.black
 //    }
     
-    func addImage(_ image: UIImage) {
-        node.geometry!.firstMaterial!.fillMode = .fill
-//        guard let cgImage = image.cgImage else { print("bad img"); return }
-//        let flippedImage = UIImage(cgImage: cgImage, scale: image.scale, orientation: .up)
-        let flippedImage = Luma.flipImage(image)
-        node.geometry!.firstMaterial!.emission.contents = flippedImage
-//        Luma.light.flipY(image: image) { pixImage in }
-    }
+//    func addImage(_ image: UIImage) {
+//        node.geometry!.firstMaterial!.fillMode = .fill
+////        guard let cgImage = image.cgImage else { print("bad img"); return }
+////        let flippedImage = UIImage(cgImage: cgImage, scale: image.scale, orientation: .up)
+//        let flippedImage = Luma.flipImage(image)
+//        node.geometry!.firstMaterial!.emission.contents = flippedImage
+////        Luma.light.flipY(image: image) { pixImage in }
+//    }
     
-    func removeImage() {
-        node.geometry!.firstMaterial!.fillMode = .lines
-        node.geometry!.firstMaterial!.emission.contents = nil
-    }
+//    func removeImage() {
+//        node.geometry!.firstMaterial!.fillMode = .lines
+//        node.geometry!.firstMaterial!.emission.contents = nil
+//    }
     
     func new(texture: MTLTexture) {
-//        node.geometry!.firstMaterial!.emission.contents = texture
+        guard !wireframe else { return }
+        node.geometry!.firstMaterial!.fillMode = .fill
+        node.geometry!.firstMaterial!.diffuse.contents = texture
     }
     func new(image: UIImage) {
-        node.geometry!.firstMaterial!.emission.contents = image
+//        node.geometry!.firstMaterial!.emission.contents = image
+    }
+    
+    func wireframeOn() {
+        node.geometry!.firstMaterial!.fillMode = .lines
+        node.geometry!.firstMaterial!.diffuse.contents = nil
+        wireframe = true
+    }
+    
+    func wireframeOff() {
+        wireframe = false
     }
     
 }

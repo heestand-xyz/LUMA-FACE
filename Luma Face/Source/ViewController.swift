@@ -7,9 +7,9 @@
 //
 
 import ARKit
-import Pixels
+import PixelKit
 
-class ViewController: UIViewController, ARMirror, PixelsDelegate {
+class ViewController: UIViewController, ARMirror, PixelDelegate {
     
     var content: Content!
     
@@ -38,6 +38,15 @@ class ViewController: UIViewController, ARMirror, PixelsDelegate {
     var rBtn: UIButton!
     var gBtn: UIButton!
     var bBtn: UIButton!
+    var rBgBtn: UIButton!
+    var gBgBtn: UIButton!
+    var bBgBtn: UIButton!
+    
+    var oscButton: UIButton!
+    
+    var canAR: Bool {
+        return AR.isSupported
+    }
     
     override var prefersStatusBarHidden: Bool {
         return true
@@ -49,8 +58,8 @@ class ViewController: UIViewController, ARMirror, PixelsDelegate {
     
     override func viewDidLoad() {
         
-        Pixels.main.delegate = self
-        Pixels.main.logLoopLimitActive = false
+        PixelKit.main.delegate = self
+        PixelKit.main.logLoopLimitActive = false
         
         content = Content()
         
@@ -60,12 +69,12 @@ class ViewController: UIViewController, ARMirror, PixelsDelegate {
         
 //        luma = Luma(frame: view.bounds)
         
-        if AR.isSupported {
-            ar = AR(frame: airView.bounds)
+        if canAR {
+            ar = AR(frame: /*airView.*/view.bounds)
 //            face = Face(frame: view.bounds)
             content.delegate = ar
         } else {
-            sim = Sim(frame: airView.bounds)
+            sim = Sim(frame: /*airView.*/view.bounds)
             content.delegate = sim
         }
         
@@ -73,12 +82,12 @@ class ViewController: UIViewController, ARMirror, PixelsDelegate {
         super.viewDidLoad()
         
         
-        if AR.isSupported {
+        if canAR {
             ar!.mirrors = [self/*, luma*/]
 //            ar!.view.alpha = 0
-            airView.addSubview(ar!.view)
+            /*airView.*/view.addSubview(ar!.view)
         } else {
-            airView.addSubview(sim!.view)
+            /*airView.*/view.addSubview(sim!.view)
         }
         
 //        luma.view.alpha = 0.1
@@ -137,6 +146,25 @@ class ViewController: UIViewController, ARMirror, PixelsDelegate {
         bBtn.addTarget(self, action: #selector(rgbOnOff), for: .touchUpInside)
         view.addSubview(bBtn)
         
+        rBgBtn = UIButton()
+        rBgBtn.backgroundColor = .red
+        rBgBtn.tag = -1
+        rBgBtn.alpha = 1 / 3
+        rBgBtn.addTarget(self, action: #selector(rgbBgOnOff), for: .touchUpInside)
+        view.addSubview(rBgBtn)
+        gBgBtn = UIButton()
+        gBgBtn.backgroundColor = .green
+        gBgBtn.tag = -2
+        gBgBtn.alpha = 1 / 3
+        gBgBtn.addTarget(self, action: #selector(rgbBgOnOff), for: .touchUpInside)
+        view.addSubview(gBgBtn)
+        bBgBtn = UIButton()
+        bBgBtn.backgroundColor = .blue
+        bBgBtn.tag = -3
+        bBgBtn.alpha = 1 / 3
+        bBgBtn.addTarget(self, action: #selector(rgbBgOnOff), for: .touchUpInside)
+        view.addSubview(bBgBtn)
+        
         NotificationCenter.default.addObserver(self, selector: #selector(appWillEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(batteryLevelDidChange), name: UIDevice.batteryLevelDidChangeNotification, object: nil)
         
@@ -152,11 +180,34 @@ class ViewController: UIViewController, ARMirror, PixelsDelegate {
         airPlayPIX.inPix = bgPix
         airPlayPIX.view.addSubview(airView)
         
+        let ip = LFIP.getAddress()
+        let port = LFOSCServer.main.port
+        
+        oscButton = UIButton(type: .system)
+        oscButton.isEnabled = false
+        oscButton.tintColor = .white
+        oscButton.setTitle("\(ip):\(port)", for: .normal)
+        view.addSubview(oscButton)
+        
+        LFOSCServer.main.listen(to: "ping") { _ in
+            let alert = UIAlertController(title: "OSC Ping", message: nil, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
+        LFOSCServer.main.listen(to: "image-index") { index in
+            if self.canAR {
+                self.ar?.wireframeOff()
+            } else {
+                self.sim?.wireframeOff()
+            }
+            self.content.loadImageAt(index: index as! Int)
+        }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if AR.isSupported {
+        if canAR {
             ar!.run()
         }
         
@@ -178,19 +229,43 @@ class ViewController: UIViewController, ARMirror, PixelsDelegate {
         bBtn.widthAnchor.constraint(equalToConstant: 30).isActive = true
         bBtn.heightAnchor.constraint(equalToConstant: 30).isActive = true
         
+        
+        rBgBtn.translatesAutoresizingMaskIntoConstraints = false
+        rBgBtn.topAnchor.constraint(equalTo: rBtn.bottomAnchor).isActive = true
+        rBgBtn.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: -30).isActive = true
+        rBgBtn.widthAnchor.constraint(equalToConstant: 30).isActive = true
+        rBgBtn.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        
+        gBgBtn.translatesAutoresizingMaskIntoConstraints = false
+        gBgBtn.topAnchor.constraint(equalTo: gBtn.bottomAnchor).isActive = true
+        gBgBtn.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0).isActive = true
+        gBgBtn.widthAnchor.constraint(equalToConstant: 30).isActive = true
+        gBgBtn.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        
+        bBgBtn.translatesAutoresizingMaskIntoConstraints = false
+        bBgBtn.topAnchor.constraint(equalTo: bBtn.bottomAnchor).isActive = true
+        bBgBtn.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 30).isActive = true
+        bBgBtn.widthAnchor.constraint(equalToConstant: 30).isActive = true
+        bBgBtn.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        
+        
+        oscButton.translatesAutoresizingMaskIntoConstraints = false
+        oscButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        oscButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20).isActive = true
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        if AR.isSupported {
+        if canAR {
             ar!.pause()
         }
     }
     
     // MARK: - Pixels
     
-    func pixelsFrameLoop() {
-        fpsLabel.text = "\(Pixels.main.fps) fps"
+    func pixelFrameLoop() {
+        fpsLabel.text = "\(PixelKit.main.fps) fps"
     }
     
     // MARK: - AR
@@ -226,41 +301,68 @@ class ViewController: UIViewController, ARMirror, PixelsDelegate {
         content.mult(color: c)
     }
     
+    @objc func rgbBgOnOff(btn: UIButton) {
+        btn.tag = -btn.tag
+        let r = rBgBtn.tag > 0 ? 1 : 0
+        let g = gBgBtn.tag > 0 ? 1 : 0
+        let b = bBgBtn.tag > 0 ? 1 : 0
+        btn.alpha = btn.tag > 0 ? 1.0 : 1 / 3
+        let c = LiveColor(r: LiveFloat(r), g: LiveFloat(g), b: LiveFloat(b))
+        content.bg(color: c)
+    }
+    
     // MARK: Face Mask
     
     @objc func addFaceMask(longPess: UILongPressGestureRecognizer) {
         guard longPess.state == .began else { return }
-        ViewAssistant.shared.alert("Luma Face", "AR\(AR.isSupported ? "" : " not") supported.", actions: [
+        ViewAssistant.shared.alert("Luma Face", "AR\(canAR ? "" : " not") supported.", actions: [
+            ViewAssistant.AlertAction(title: "Wireframe", style: .default, handeler: { _ in
+                if self.canAR {
+                    self.ar?.wireframeOn()
+                } else {
+                    self.sim?.wireframeOn()
+                }
+            }),
             ViewAssistant.AlertAction(title: "Next Image", style: .default, handeler: { _ in
+                if self.canAR {
+                    self.ar?.wireframeOff()
+                } else {
+                    self.sim?.wireframeOff()
+                }
                 self.content.loadNextImage()
             }),
 //            ViewAssistant.AlertAction(title: "Next Video", style: .default, handeler: { _ in
 //                self.content.loadNextVideo()
 //            }),
-            ViewAssistant.AlertAction(title: "Load Image Texture", style: .default, handeler: { _ in
+            ViewAssistant.AlertAction(title: "Load Image", style: .default, handeler: { _ in
                 FileAssistant.shared.media_picker_assistant.pickMedia(media_type: .photo, pickedImage: { image in
                     DispatchQueue.main.async {
-//                        if AR.isSupported {
+//                        if canAR {
 //                            self.ar!.addImage(image)
 //                        } else {
 //                            self.sim!.addImage(image)
 //                        }
+                        if self.canAR {
+                            self.ar?.wireframeOff()
+                        } else {
+                            self.sim?.wireframeOff()
+                        }
                         self.content.loadExternal(image: image)
                     }
                 })
             }),
 //            ViewAssistant.AlertAction(title: "Load PIX A Texture", style: .default, handeler: { _ in
-//                if AR.isSupported {
+//                if canAR {
 //                    self.ar!.addPIXA()
 //                }
 //            }),
 //            ViewAssistant.AlertAction(title: "Load PIX B Texture", style: .default, handeler: { _ in
-//                if AR.isSupported {
+//                if canAR {
 //                    self.ar!.addPIXB()
 //                }
 //            }),
 //            ViewAssistant.AlertAction(title: "Remove Texture", style: .destructive, handeler: { _ in
-//                if AR.isSupported {
+//                if canAR {
 //                    self.ar!.removeImage()
 //                } else {
 //                    self.sim!.removeImage()
@@ -306,7 +408,7 @@ class ViewController: UIViewController, ARMirror, PixelsDelegate {
     }
     
     func moveMask() {
-        if AR.isSupported {
+        if canAR {
             let flip: CGFloat = flipped ? -1.0 : 1.0
             ar!.view.transform = CGAffineTransform.identity
                 .translatedBy(x: position.x, y: position.y)

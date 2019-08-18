@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Pixels
+import PixelKit
 
 protocol ContentDelegate {
     func new(texture: MTLTexture)
@@ -17,43 +17,32 @@ protocol ContentDelegate {
 class Content: PIXDelegate {
     
     var delegate: ContentDelegate?
-    
+
     let imagePix: ImagePIX
 //    let videoPix: VideoPIX
 //    let mediaPix: CrossPIX
     let multPix: ColorPIX
+    let bgPix: ColorPIX
     let finalPix: PIX
     
     var imageIndex: Int = 0
     var image: UIImage {
         return images[imageIndex]
     }
-    var images: [UIImage] = [
-        UIImage(named: "ARFaceGeometry_UV-Map_1k")!,
-        UIImage(named: "TEXTURE copy")!,
-        UIImage(named: "IMG_0025")!,
-        UIImage(named: "IMG_0069")!,
-        UIImage(named: "IMG_1585")!,
-        UIImage(named: "MASTER-1_00000")!,
-        UIImage(named: "MASTER-2 (0-00-00-00)")!,
-        UIImage(named: "MASTER-2_00000")!,
-        UIImage(named: "test_2")!,
-        UIImage(named: "test_3")!,
-        UIImage(named: "test_fade")!,
-        UIImage(named: "test")!,
-        UIImage(named: "with_glow_00000")!
-    ]
+    var images: [UIImage]
     
-    var videoIndex: Int = 0
-    var video: URL {
-        return videos[videoIndex]
-    }
-    var videos: [URL] = [
-//        Bundle.main.url(forResource: "lines", withExtension: "mp4")!
-        Bundle.main.url(forResource: "screen", withExtension: "mov")!
-    ]
+//    var videoIndex: Int = 0
+//    var video: URL {
+//        return videos[videoIndex]
+//    }
+//    var videos: [URL] = [
+////        Bundle.main.url(forResource: "lines", withExtension: "mp4")!
+//        Bundle.main.url(forResource: "screen", withExtension: "mov")!
+//    ]
     
     init() {
+        
+        images = FileLoader.getContentImages()
         
         imagePix = ImagePIX()
 //        videoPix = VideoPIX()
@@ -62,7 +51,9 @@ class Content: PIXDelegate {
 //        mediaPix.inPixA = imagePix
 //        mediaPix.inPixB = videoPix
         multPix = ColorPIX(res: ._2048)
-        finalPix = multPix * imagePix
+        bgPix = ColorPIX(res: ._2048)
+        bgPix.color = .black
+        finalPix = bgPix & (multPix * imagePix._lumaToAlpha())
         
         loadNextImage()
 //        loadNextVideo()
@@ -70,6 +61,11 @@ class Content: PIXDelegate {
 
         finalPix.delegate = self
         
+    }
+    
+    func loadImageAt(index: Int) {
+        imageIndex = index
+        imagePix.image = image
     }
     
     func loadNextImage() {
@@ -95,12 +91,16 @@ class Content: PIXDelegate {
     func pixDidRender(_ pix: PIX) {
         guard let texture = pix.renderedTexture else { return }
         delegate?.new(texture: texture)
-        guard let image = pix.renderedImage else { return }
-        delegate?.new(image: image)
+//        guard let image = pix.renderedImage else { return }
+//        delegate?.new(image: image)
     }
     
     func mult(color: LiveColor) {
         multPix.color = color
+    }
+    
+    func bg(color: LiveColor) {
+        bgPix.color = color
     }
     
 }

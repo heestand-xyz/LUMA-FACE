@@ -7,8 +7,8 @@
 //
 
 import UIKit
-import Pixels
-import Pixels3D
+import PixelKit
+//import Pixels3D
 import ARKit
 
 class Luma: PIXDelegate, ARMirror {
@@ -17,7 +17,7 @@ class Luma: PIXDelegate, ARMirror {
     
 //    var renderCallbacks: [(pix: PIX, callback: () -> ())] = []
     
-    var object3dPix: Object3DPIX!
+//    var object3dPix: Object3DPIX!
     var finalPix: PIX!
     
     var view: UIView {
@@ -26,8 +26,8 @@ class Luma: PIXDelegate, ARMirror {
     
     init(frame: CGRect) {
         
-        Pixels.main.logLevel = .debug
-        Pixels.main.logAll()
+//        PixelKit.main.logLevel = .debug
+//        PixelKit.main.logAll()
         
         let res = PIX.Res(autoScaleSize: frame.size)
     
@@ -35,9 +35,9 @@ class Luma: PIXDelegate, ARMirror {
 //        polygonPix.color = LiveColor.white.withAlpha(of: 0.25)
 //        polygonPix.bgColor = .clear
         
-        object3dPix = Object3DPIX(res: res)
+//        object3dPix = Object3DPIX(res: res)
         
-        finalPix = object3dPix
+//        finalPix = object3dPix
         finalPix.view.frame = frame
         finalPix.view.checker = false
         
@@ -52,7 +52,7 @@ class Luma: PIXDelegate, ARMirror {
     func didUpdate(arFrame: ARFrame) {
         let arCameraTransform = arFrame.camera.transform
         let arProjectionMatrix = arFrame.camera.projectionMatrix
-        object3dPix.update(cameraMatrix: arCameraTransform, projectionMatrix: arProjectionMatrix)
+//        object3dPix.update(cameraMatrix: arCameraTransform, projectionMatrix: arProjectionMatrix)
     }
     
     func didAdd() {
@@ -61,15 +61,15 @@ class Luma: PIXDelegate, ARMirror {
     
     func didUpdate(geo: ARFaceGeometry) {
         print("LUMA NEW")
-        object3dPix.triangleVertices = geo.vertices.map({ v -> _3DVec in
-            return _3DVec(x: LiveFloat(v.x), y: LiveFloat(v.y), z: LiveFloat(v.z))
-        })
-        object3dPix.triangleUVs = geo.textureCoordinates.map({ v -> _3DUV in
-            return _3DUV(u: LiveFloat(v.x), v: LiveFloat(v.y))
-        })
-        object3dPix.triangleIndices = geo.triangleIndices.map({ i -> Int in
-            return Int(i)
-        })
+//        object3dPix.triangleVertices = geo.vertices.map({ v -> _3DVec in
+//            return _3DVec(x: LiveFloat(v.x), y: LiveFloat(v.y), z: LiveFloat(v.z))
+//        })
+//        object3dPix.triangleUVs = geo.textureCoordinates.map({ v -> _3DUV in
+//            return _3DUV(u: LiveFloat(v.x), v: LiveFloat(v.y))
+//        })
+//        object3dPix.triangleIndices = geo.triangleIndices.map({ i -> Int in
+//            return Int(i)
+//        })
         print(geo.triangleCount, "===============", geo.triangleCount)
     }
     
@@ -81,9 +81,9 @@ class Luma: PIXDelegate, ARMirror {
     
     func clear() {
         print("LUMA CLEAR")
-        object3dPix.triangleVertices = []
-        object3dPix.triangleUVs = []
-        object3dPix.triangleIndices = []
+//        object3dPix.triangleVertices = []
+//        object3dPix.triangleUVs = []
+//        object3dPix.triangleIndices = []
     }
     
     // MARK: Flip

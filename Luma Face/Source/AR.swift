@@ -7,7 +7,7 @@
 //
 
 import ARKit
-import Pixels
+import PixelKit
 
 protocol ARMirror {
     func activityUpdated(_ active: Bool)
@@ -33,6 +33,8 @@ class AR: NSObject, ARSessionDelegate, ARSCNViewDelegate, ContentDelegate {
     var lowFps: Bool = false
     
     var node: SCNNode?
+    
+    var wireframe: Bool = false
     
     var lastUpdate: Date?
     var lastActive: Bool {
@@ -73,6 +75,8 @@ class AR: NSObject, ARSessionDelegate, ARSCNViewDelegate, ContentDelegate {
         scnView.session = session
         scnView.delegate = self
         view.addSubview(scnView)
+        
+        wireframeOn()
         
 //        scnFaceGeometry.firstMaterial!.fillMode = .lines
 //        faceNode.geometry = scnFaceGeometry
@@ -115,6 +119,7 @@ class AR: NSObject, ARSessionDelegate, ARSCNViewDelegate, ContentDelegate {
 //    }
     
     func new(texture: MTLTexture) {
+        guard !wireframe else { return }
         node?.geometry!.firstMaterial!.fillMode = .fill
         node?.geometry!.firstMaterial!.diffuse.contents = texture
     }
@@ -123,40 +128,50 @@ class AR: NSObject, ARSessionDelegate, ARSCNViewDelegate, ContentDelegate {
 //        node?.geometry!.firstMaterial!.diffuse.contents = image
     }
     
-    func addImage(_ image: UIImage) {
-        guard node != nil else { return }
-        node!.geometry!.firstMaterial!.fillMode = .fill
-        node!.geometry!.firstMaterial!.diffuse.contents = image
-        self.image = image
-        self.pix = nil
+    func wireframeOn() {
+        node?.geometry!.firstMaterial!.fillMode = .lines
+        node?.geometry!.firstMaterial!.diffuse.contents = nil
+        wireframe = true
     }
     
-    func addPIXA() {
-        guard node != nil else { return }
-        node!.geometry!.firstMaterial!.fillMode = .fill
-        let noisePix = NoisePIX(res: ._1024)
-        noisePix.zPosition = .live / 10
-        self.pix = noisePix !** 0.25
-        self.image = nil
+    func wireframeOff() {
+        wireframe = false
     }
     
-    func addPIXB() {
-        guard node != nil else { return }
-        node!.geometry!.firstMaterial!.fillMode = .fill
-        let noisePix = NoisePIX(res: ._1024)
-        noisePix.octaves = 3
-        noisePix.zPosition = .live / 10
-        self.pix = noisePix._quantize(by: 0.05)._edge()
-        self.image = nil
-    }
+//    func addImage(_ image: UIImage) {
+//        guard node != nil else { return }
+//        node!.geometry!.firstMaterial!.fillMode = .fill
+//        node!.geometry!.firstMaterial!.diffuse.contents = image
+//        self.image = image
+//        self.pix = nil
+//    }
     
-    func removeImage() {
-        guard node != nil else { return }
-        node!.geometry!.firstMaterial!.fillMode = .lines
-        node!.geometry!.firstMaterial!.diffuse.contents = nil
-        self.image = nil
-        self.pix = nil
-    }
+//    func addPIXA() {
+//        guard node != nil else { return }
+//        node!.geometry!.firstMaterial!.fillMode = .fill
+//        let noisePix = NoisePIX(res: ._1024)
+//        noisePix.zPosition = .live / 10
+//        self.pix = noisePix !** 0.25
+//        self.image = nil
+//    }
+    
+//    func addPIXB() {
+//        guard node != nil else { return }
+//        node!.geometry!.firstMaterial!.fillMode = .fill
+//        let noisePix = NoisePIX(res: ._1024)
+//        noisePix.octaves = 3
+//        noisePix.zPosition = .live / 10
+//        self.pix = noisePix._quantize(0.05)._edge()
+//        self.image = nil
+//    }
+    
+//    func removeImage() {
+//        guard node != nil else { return }
+//        node!.geometry!.firstMaterial!.fillMode = .lines
+//        node!.geometry!.firstMaterial!.diffuse.contents = nil
+//        self.image = nil
+//        self.pix = nil
+//    }
     
     // MARK: ARSessionDelegate
     
@@ -226,14 +241,17 @@ class AR: NSObject, ARSessionDelegate, ARSCNViewDelegate, ContentDelegate {
         let faceGeometry = ARSCNFaceGeometry(device: device)
         node = SCNNode(geometry: faceGeometry)
         
-        if pix != nil {
-            addPIXA()
-        } else if let image = self.image {
-            addImage(image)
-        } else {
-            removeImage()
+        if wireframe {
+            wireframeOn()
         }
         
+//        if pix != nil {
+//            addPIXA()
+//        } else if let image = self.image {
+//            addImage(image)
+//        } else {
+//            removeImage()
+//        }
         
         return node
     }
