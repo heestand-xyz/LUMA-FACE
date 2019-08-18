@@ -1,0 +1,38 @@
+PODS:
+  - CocoaAsyncSocket (7.6.3)
+  - MetalPerformanceShadersProxy (0.3.0):
+    - MetalPerformanceShadersProxy/Proxy (= 0.3.0)
+  - MetalPerformanceShadersProxy/Proxy (0.3.0)
+  - OSCKit (0.3.5):
+    - CocoaAsyncSocket (~> 7.3)
+  - PixelKit (0.6.5):
+    - MetalPerformanceShadersProxy (~> 0.3)
+    - OSCKit
+    - SwiftSVG (~> 2.0)
+  - SwiftSVG (2.3.0)
+
+DEPENDENCIES:
+  - OSCKit
+  - PixelKit (from `~/All-Code/All-of-PixelKit/PixelKit`)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - CocoaAsyncSocket
+    - MetalPerformanceShadersProxy
+    - OSCKit
+    - SwiftSVG
+
+EXTERNAL SOURCES:
+  PixelKit:
+    :path: "~/All-Code/All-of-PixelKit/PixelKit"
+
+SPEC CHECKSUMS:
+  CocoaAsyncSocket: eafaa68a7e0ec99ead0a7b35015e0bf25d2c8987
+  MetalPerformanceShadersProxy: a279966a6a22449d3e32a8cd5ca246d625aa7d43
+  OSCKit: 4470dbd30bc792dcf66dc4e7b5d1ec7174add33c
+  PixelKit: 9cacc0e2bdf9230db70ee9242a305f504cb2de10
+  SwiftSVG: a864db6198fbddfd377f8169849580df18512e67
+
+PODFILE CHECKSUM: 0b3fa8aab7e75198cf4ccea70b75e222a0c7c1d4
+
+COCOAPODS: 1.7.1

@@ -48,6 +48,9 @@ class AR: NSObject, ARSessionDelegate, ARSCNViewDelegate, ContentDelegate {
     var pix: PIX?
     var content: Bool = true
     
+    var bgSphere: SCNSphere!
+    var bgNode: SCNNode!
+    
 //    var image: UIImage?
     
 //    var faceAnchor: ARFaceAnchor?
@@ -83,10 +86,10 @@ class AR: NSObject, ARSessionDelegate, ARSCNViewDelegate, ContentDelegate {
         
 //        mirror?.didSetup(cam: scnView.scene.rootNode.camera!)
         
-        let bgSphere = SCNSphere(radius: 10)
+        bgSphere = SCNSphere(radius: 10)
         bgSphere.firstMaterial!.isDoubleSided = true
         bgSphere.firstMaterial!.diffuse.contents = UIColor.black
-        let bgNode = SCNNode(geometry: bgSphere)
+        bgNode = SCNNode(geometry: bgSphere)
         scnView.scene.rootNode.addChildNode(bgNode)
 
     }

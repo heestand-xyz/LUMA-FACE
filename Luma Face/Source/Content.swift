@@ -53,7 +53,7 @@ class Content: PIXDelegate {
         multPix = ColorPIX(res: ._2048)
         bgPix = ColorPIX(res: ._2048)
         bgPix.color = .black
-        finalPix = bgPix & (multPix * imagePix._lumaToAlpha())
+        finalPix = bgPix & (multPix * imagePix._flipY()._lumaToAlpha())
         
         loadNextImage()
 //        loadNextVideo()
@@ -70,7 +70,7 @@ class Content: PIXDelegate {
     
     func loadNextImage() {
         imagePix.image = image
-        imageIndex = imageIndex + 1 % images.count
+        imageIndex = (imageIndex + 1) % images.count
 //        mediaPix.fraction = 0.0
     }
     

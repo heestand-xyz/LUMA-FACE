@@ -15,7 +15,7 @@ class FileLoader {
         let fileURLs = try! FileManager.default.contentsOfDirectory(at: documentsURL, includingPropertiesForKeys: nil)
         var urls: [URL] = []
         for fileURL in fileURLs {
-            if ["png", "jpg"].contains(fileURL.pathExtension) {
+            if ["png", "jpg", "PNG", "JPG"].contains(fileURL.pathExtension) {
                 print("IMG:", fileURL)
                 urls.append(fileURL)
             }

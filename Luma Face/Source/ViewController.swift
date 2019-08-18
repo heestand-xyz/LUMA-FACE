@@ -19,6 +19,12 @@ class ViewController: UIViewController, ARMirror, PixelDelegate {
 //    var face: Face?
     var sim: Sim?
     
+    enum Display {
+        case iPhone
+        case projector
+    }
+    let display: Display = .iPhone
+    
     var flipped: Bool = false
     var zoom: CGFloat = 1.0
     var position: CGPoint = .zero
@@ -70,7 +76,7 @@ class ViewController: UIViewController, ARMirror, PixelDelegate {
 //        luma = Luma(frame: view.bounds)
         
         if canAR {
-            ar = AR(frame: /*airView.*/view.bounds)
+            ar = AR(frame: display == .projector ? airView.bounds : view.bounds)
 //            face = Face(frame: view.bounds)
             content.delegate = ar
         } else {
@@ -85,7 +91,12 @@ class ViewController: UIViewController, ARMirror, PixelDelegate {
         if canAR {
             ar!.mirrors = [self/*, luma*/]
 //            ar!.view.alpha = 0
-            /*airView.*/view.addSubview(ar!.view)
+            switch display {
+            case .iPhone:
+                view.addSubview(ar!.view)
+            case .projector:
+                airView.addSubview(ar!.view)
+            }
         } else {
             /*airView.*/view.addSubview(sim!.view)
         }
@@ -307,8 +318,9 @@ class ViewController: UIViewController, ARMirror, PixelDelegate {
         let g = gBgBtn.tag > 0 ? 1 : 0
         let b = bBgBtn.tag > 0 ? 1 : 0
         btn.alpha = btn.tag > 0 ? 1.0 : 1 / 3
-        let c = LiveColor(r: LiveFloat(r), g: LiveFloat(g), b: LiveFloat(b))
+        let c = LiveColor(r: LiveFloat(r) * 0.25, g: LiveFloat(g) * 0.25, b: LiveFloat(b) * 0.25)
         content.bg(color: c)
+        ar?.bgSphere.firstMaterial?.diffuse.contents = c.uiColor
     }
     
     // MARK: Face Mask
