@@ -14,6 +14,7 @@ public class LFOSCServer: NSObject, OSCServerDelegate {
     
     public var port: Int = 8888 {
         didSet {
+            server.stop()
             server.listen(port)
         }
     }

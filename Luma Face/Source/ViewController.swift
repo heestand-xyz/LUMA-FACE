@@ -48,8 +48,9 @@ class ViewController: UIViewController, ARMirror, PixelDelegate {
     var gBgBtn: UIButton!
     var bBgBtn: UIButton!
     
-    var oscButton: UIButton!
-    
+    var oscServerButton: UIButton!
+    var oscClientButton: UIButton!
+
     var canAR: Bool {
         return AR.isSupported
     }
@@ -191,14 +192,15 @@ class ViewController: UIViewController, ARMirror, PixelDelegate {
         airPlayPIX.inPix = bgPix
         airPlayPIX.view.addSubview(airView)
         
-        let ip = LFIP.getAddress()
-        let port = LFOSCServer.main.port
         
-        oscButton = UIButton(type: .system)
-        oscButton.isEnabled = false
-        oscButton.tintColor = .white
-        oscButton.setTitle("\(ip):\(port)", for: .normal)
-        view.addSubview(oscButton)
+        let local_ip = LFIP.getAddress()
+        let local_port = LFOSCServer.main.port
+        
+        oscServerButton = UIButton(type: .system)
+        oscServerButton.isEnabled = false
+        oscServerButton.tintColor = .white
+        oscServerButton.setTitle("Server: \(local_ip):\(local_port)", for: .normal)
+        view.addSubview(oscServerButton)
         
         LFOSCServer.main.listen(to: "ping") { _ in
             let alert = UIAlertController(title: "OSC Ping", message: nil, preferredStyle: .alert)
@@ -213,6 +215,17 @@ class ViewController: UIViewController, ARMirror, PixelDelegate {
             }
             self.content.loadImageAt(index: index as! Int)
         }
+        
+        
+        let remote_ip = UserDefaults.standard.string(forKey: "osc-ip") ?? "0.0.0.0"
+        let remote_port = UserDefaults.standard.integer(forKey: "osc-port")
+        LFOSCClient.main.setup(ip: remote_ip, port: remote_port)
+        
+        oscClientButton = UIButton(type: .system)
+        oscClientButton.tintColor = .white
+        oscClientButton.setTitle("Client: \(remote_ip):\(remote_port)", for: .normal)
+        oscClientButton.addTarget(self, action: #selector(oscSetup), for: .touchUpInside)
+        view.addSubview(oscClientButton)
         
     }
     
@@ -260,10 +273,39 @@ class ViewController: UIViewController, ARMirror, PixelDelegate {
         bBgBtn.heightAnchor.constraint(equalToConstant: 30).isActive = true
         
         
-        oscButton.translatesAutoresizingMaskIntoConstraints = false
-        oscButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        oscButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20).isActive = true
+        oscServerButton.translatesAutoresizingMaskIntoConstraints = false
+        oscServerButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        oscServerButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20).isActive = true
         
+        oscClientButton.translatesAutoresizingMaskIntoConstraints = false
+        oscClientButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        oscClientButton.bottomAnchor.constraint(equalTo: oscServerButton.topAnchor, constant: -10).isActive = true
+        
+    }
+    
+    @objc func oscSetup() {
+        let ip = UserDefaults.standard.string(forKey: "osc-ip") ?? "0.0.0.0"
+        let port = UserDefaults.standard.integer(forKey: "osc-port")
+        let alert = UIAlertController(title: "OSC", message: nil, preferredStyle: .alert)
+        alert.addTextField { textField in
+            textField.text = ip
+        }
+        alert.addTextField { textField in
+            textField.text = "\(port)"
+        }
+        alert.addAction(UIAlertAction(title: "Setup", style: .default, handler: { _ in
+            let ip = alert.textFields![0].text ?? "0.0.0.0"
+            let port = Int(alert.textFields![1].text ?? "0") ?? 0
+            UserDefaults.standard.set(ip, forKey: "osc-ip")
+            UserDefaults.standard.set(port, forKey: "osc-port")
+            self.oscClientButton.setTitle("Client: \(ip):\(port)", for: .normal)
+            LFOSCClient.main.setup(ip: ip, port: port)
+        }))
+        alert.addAction(UIAlertAction(title: "Ping", style: .default, handler: { _ in
+            LFOSCClient.main.send(1, to: "ping")
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {

@@ -179,10 +179,10 @@ class AR: NSObject, ARSessionDelegate, ARSCNViewDelegate, ContentDelegate {
     // MARK: ARSessionDelegate
     
     func session(_ session: ARSession, didUpdate frame: ARFrame) {
-        print("AR SE FRAME")
+//        print("AR SE FRAME")
         if isActive != lastActive {
             isActive = lastActive
-            print("AR ACTIVE", isActive)
+//            print("AR ACTIVE", isActive)
             mirrors.forEach { mirror in
                 mirror.activityUpdated(isActive)
             }
@@ -196,7 +196,7 @@ class AR: NSObject, ARSessionDelegate, ARSCNViewDelegate, ContentDelegate {
     }
     
     func session(_ session: ARSession, didAdd anchors: [ARAnchor]) {
-        print("AR SE ADD", anchors.count)
+//        print("AR SE ADD", anchors.count)
         mirrors.forEach { mirror in
             mirror.didAdd()
         }
@@ -208,7 +208,7 @@ class AR: NSObject, ARSessionDelegate, ARSCNViewDelegate, ContentDelegate {
     }
 
     func session(_ session: ARSession, didUpdate anchors: [ARAnchor]) {
-        print("AR SE NEW", anchors.count)
+//        print("AR SE NEW", anchors.count)
         guard let faceAnchor = anchors.first! as? ARFaceAnchor else {
             print("Non face anchor.")
             return
@@ -224,7 +224,7 @@ class AR: NSObject, ARSessionDelegate, ARSCNViewDelegate, ContentDelegate {
     }
     
     func session(_ session: ARSession, didRemove anchors: [ARAnchor]) {
-        print("AR SE RM", anchors.count)
+//        print("AR SE RM", anchors.count)
         mirrors.forEach { mirror in
             mirror.didRemove()
         }
@@ -234,7 +234,7 @@ class AR: NSObject, ARSessionDelegate, ARSCNViewDelegate, ContentDelegate {
     
     func renderer(_ renderer: SCNSceneRenderer,
                   nodeFor anchor: ARAnchor) -> SCNNode? {
-        print("AR SCN NODE")
+//        print("AR SCN NODE")
         
         guard let device = scnView.device else {
             print("AR Error: Device not found.")
@@ -260,18 +260,18 @@ class AR: NSObject, ARSessionDelegate, ARSCNViewDelegate, ContentDelegate {
     }
     
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
-        print("AR SCN DID ADD")
+//        print("AR SCN DID ADD")
 //        mirror?.didAdd()
     }
     
     func renderer(_ renderer: SCNSceneRenderer, willUpdate node: SCNNode, for anchor: ARAnchor) {
-        print("AR SCN WILL NEW")
+//        print("AR SCN WILL NEW")
     }
     
     func renderer(_ renderer: SCNSceneRenderer,
                   didUpdate node: SCNNode,
                   for anchor: ARAnchor) {
-        print("AR SCN DID NEW")
+//        print("AR SCN DID NEW")
         
         guard let faceAnchor = anchor as? ARFaceAnchor,
               let faceGeometry = node.geometry as? ARSCNFaceGeometry else {
@@ -290,7 +290,7 @@ class AR: NSObject, ARSessionDelegate, ARSCNViewDelegate, ContentDelegate {
     func renderer(_ renderer: SCNSceneRenderer,
                   didRemove node: SCNNode,
                   for anchor: ARAnchor) {
-        print("AR SCN DID RM")
+//        print("AR SCN DID RM")
         self.node = nil
 //        mirror?.didRemove()
     }
