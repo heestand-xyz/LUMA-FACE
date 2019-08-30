@@ -36,6 +36,8 @@
 		7457044621A9D30F007C3DB9 /* ViewAssistant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7457044521A9D30F007C3DB9 /* ViewAssistant.swift */; };
 		7457044821AACAF1007C3DB9 /* 3D.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 7457044721AACAF1007C3DB9 /* 3D.scnassets */; };
 		7457044A21AACB24007C3DB9 /* Sim.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7457044921AACB24007C3DB9 /* Sim.swift */; };
+		748922A7231989F60015DE35 /* Peer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748922A6231989F60015DE35 /* Peer.swift */; };
+		748922A8231989F60015DE35 /* Peer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748922A6231989F60015DE35 /* Peer.swift */; };
 		748F67E922C8E74C003A64A9 /* FileLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748F67E822C8E74C003A64A9 /* FileLoader.swift */; };
 		748F67EA22C8E74C003A64A9 /* FileLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748F67E822C8E74C003A64A9 /* FileLoader.swift */; };
 		748F67EE22C8E8EB003A64A9 /* LFOSCServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748F67ED22C8E8EB003A64A9 /* LFOSCServer.swift */; };
@@ -111,6 +113,7 @@
 		7457044521A9D30F007C3DB9 /* ViewAssistant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewAssistant.swift; sourceTree = "<group>"; };
 		7457044721AACAF1007C3DB9 /* 3D.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = 3D.scnassets; sourceTree = "<group>"; };
 		7457044921AACB24007C3DB9 /* Sim.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sim.swift; sourceTree = "<group>"; };
+		748922A6231989F60015DE35 /* Peer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Peer.swift; sourceTree = "<group>"; };
 		748F67E822C8E74C003A64A9 /* FileLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileLoader.swift; sourceTree = "<group>"; };
 		748F67ED22C8E8EB003A64A9 /* LFOSCServer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LFOSCServer.swift; sourceTree = "<group>"; };
 		74CF071922C93F9D00FBEEDF /* LFIP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LFIP.swift; sourceTree = "<group>"; };
@@ -276,6 +279,7 @@
 				748F67ED22C8E8EB003A64A9 /* LFOSCServer.swift */,
 				7429DDB022FD6D2B00ED472D /* LFOSCClient.swift */,
 				74CF071922C93F9D00FBEEDF /* LFIP.swift */,
+				748922A6231989F60015DE35 /* Peer.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -577,6 +581,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				748922A8231989F60015DE35 /* Peer.swift in Sources */,
 				7429DDB522FD712000ED472D /* LiveCamView.swift in Sources */,
 				7411B51E22A1920300F861BD /* ViewController.swift in Sources */,
 				7429DDB222FD6D2C00ED472D /* LFOSCClient.swift in Sources */,
@@ -593,6 +598,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				74DB096621A8DD5E00DC061A /* ViewController.swift in Sources */,
+				748922A7231989F60015DE35 /* Peer.swift in Sources */,
 				74DB096C21A8DD5E00DC061A /* Luma_Face.xcdatamodeld in Sources */,
 				74CF071A22C93F9D00FBEEDF /* LFIP.swift in Sources */,
 				7457044A21AACB24007C3DB9 /* Sim.swift in Sources */,
