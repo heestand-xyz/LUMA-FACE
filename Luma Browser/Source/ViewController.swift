@@ -42,6 +42,7 @@ class ViewController: UIViewController, LumaBrowseViewDelegate {
         view.addSubview(oscServerButton)
         
         LFOSCServer.main.listen(to: "ping") { _ in
+            print("PING")
             let alert = UIAlertController(title: "OSC Ping", message: nil, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
             self.present(alert, animated: true, completion: nil)
