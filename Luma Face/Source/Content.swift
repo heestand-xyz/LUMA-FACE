@@ -25,6 +25,8 @@ class Content: PIXDelegate {
     let bgPix: ColorPIX
     let finalPix: PIX
     
+    var calibrationImage: UIImage!
+    
     var imageIndex: Int = 0
     var image: UIImage {
         return images[imageIndex]
@@ -61,6 +63,18 @@ class Content: PIXDelegate {
 
         finalPix.delegate = self
         
+        calibrationImage = flip(image: UIImage(named: "calibration")!)!
+        
+    }
+    
+    func flip(image: UIImage) -> UIImage? {
+        guard let cgImage = image.cgImage else { return nil }
+        guard let context = CGContext(data: nil, width: Int(image.size.width), height: Int(image.size.height), bitsPerComponent: 8, bytesPerRow: 4 * Int(image.size.width), space: CGColorSpace(name: CGColorSpace.sRGB)!, bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue) else { return nil }
+        context.scaleBy(x: 1, y: -1)
+        context.translateBy(x: 0, y: -image.size.height)
+        context.draw(cgImage, in: CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height))
+        guard let image = context.makeImage() else { return nil }
+        return UIImage(cgImage: image)
     }
     
     func loadImageAt(index: Int) {
@@ -77,6 +91,14 @@ class Content: PIXDelegate {
     func loadExternal(image: UIImage) {
         imagePix.image = image
 //        mediaPix.fraction = 0.0
+    }
+    
+    func loadCalibration() {
+        imagePix.image = calibrationImage
+    }
+    
+    func loadLastImage() {
+        imagePix.image = image
     }
     
 //    func loadNextVideo() {

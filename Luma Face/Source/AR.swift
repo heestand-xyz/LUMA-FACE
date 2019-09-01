@@ -56,7 +56,18 @@ class AR: NSObject, ARSessionDelegate, ARSCNViewDelegate, ContentDelegate {
 //    var faceAnchor: ARFaceAnchor?
 //    let scnFaceGeometry: ARSCNFaceGeometry
 //    let faceNode: SCNNode
+
+    let maskSceneView: SCNView
+    let maskScene: SCNScene
+
+    var maskNode: SCNNode?
+
+    var cam: SCNCamera?
+    var camNode: SCNNode?
+    var camSubNode: SCNNode?
     
+    var freeze: Bool = false
+        
     init(frame: CGRect) {
         
         view = UIView(frame: frame)
@@ -64,6 +75,9 @@ class AR: NSObject, ARSessionDelegate, ARSCNViewDelegate, ContentDelegate {
         session = ARSession()
         
         scnView = ARSCNView(frame: view.bounds)
+        
+        maskSceneView = SCNView()
+        maskScene = SCNScene()
         
 //        let device: MTLDevice = scnView.device!
 //        scnFaceGeometry = ARSCNFaceGeometry(device: device)!
@@ -91,7 +105,23 @@ class AR: NSObject, ARSessionDelegate, ARSCNViewDelegate, ContentDelegate {
         bgSphere.firstMaterial!.diffuse.contents = UIColor.black
         bgNode = SCNNode(geometry: bgSphere)
         scnView.scene.rootNode.addChildNode(bgNode)
-
+        
+        
+        maskSceneView.scene = maskScene
+        
+        maskScene.background.contents = UIColor.black
+        
+        cam = SCNCamera()
+        cam!.fieldOfView = 68
+        cam!.zFar = 10
+        cam!.zNear = 0.01
+        camNode = SCNNode()
+        camSubNode = SCNNode()
+        camSubNode?.eulerAngles = SCNVector3(0, 0, CGFloat.pi / 2)
+        camSubNode!.camera = cam
+        camNode!.addChildNode(camSubNode!)
+        maskScene.rootNode.addChildNode(camNode!)
+        
     }
     
     func run() {
@@ -123,6 +153,8 @@ class AR: NSObject, ARSessionDelegate, ARSCNViewDelegate, ContentDelegate {
     
     func new(texture: MTLTexture) {
         guard !wireframe else { return }
+        maskNode?.geometry!.firstMaterial!.fillMode = .fill
+        maskNode?.geometry!.firstMaterial!.diffuse.contents = texture
         node?.geometry!.firstMaterial!.fillMode = .fill
         node?.geometry!.firstMaterial!.diffuse.contents = texture
     }
@@ -134,6 +166,8 @@ class AR: NSObject, ARSessionDelegate, ARSCNViewDelegate, ContentDelegate {
     func wireframeOn() {
         node?.geometry!.firstMaterial!.fillMode = .lines
         node?.geometry!.firstMaterial!.diffuse.contents = nil
+        maskNode?.geometry!.firstMaterial!.fillMode = .lines
+        maskNode?.geometry!.firstMaterial!.diffuse.contents = nil
         wireframe = true
     }
     
@@ -193,6 +227,12 @@ class AR: NSObject, ARSessionDelegate, ARSCNViewDelegate, ContentDelegate {
         if let pix = self.pix {
             node!.geometry!.firstMaterial!.diffuse.contents = pix.renderedTexture
         }
+        if !freeze {
+            DispatchQueue.main.async {
+                self.camNode?.transform = SCNMatrix4(frame.camera.transform)
+//                self.cam?.projectionTransform = SCNMatrix4(frame.camera.projectionMatrix)
+            }
+        }
     }
     
     func session(_ session: ARSession, didAdd anchors: [ARAnchor]) {
@@ -244,6 +284,10 @@ class AR: NSObject, ARSessionDelegate, ARSCNViewDelegate, ContentDelegate {
         let faceGeometry = ARSCNFaceGeometry(device: device)
         node = SCNNode(geometry: faceGeometry)
         
+        let nodeFaceGeometry = ARSCNFaceGeometry(device: device)
+        maskNode = SCNNode(geometry: nodeFaceGeometry)
+        maskScene.rootNode.addChildNode(maskNode!)
+        
         if wireframe {
             wireframeOn()
         }
@@ -279,6 +323,15 @@ class AR: NSObject, ARSessionDelegate, ARSCNViewDelegate, ContentDelegate {
                 return
         }
         
+        
+        if !freeze {
+            DispatchQueue.main.async {
+                self.maskNode!.transform = SCNMatrix4(anchor.transform)
+                (self.maskNode!.geometry as! ARSCNFaceGeometry).update(from: faceAnchor.geometry)
+            }
+        }
+
+        
         let geo = faceAnchor.geometry
         faceGeometry.update(from: geo)
 //        DispatchQueue(label: "AR").async {
@@ -293,6 +346,14 @@ class AR: NSObject, ARSessionDelegate, ARSCNViewDelegate, ContentDelegate {
 //        print("AR SCN DID RM")
         self.node = nil
 //        mirror?.didRemove()
+    }
+    
+    func moveMask(to point: CGPoint) {
+        camSubNode?.position = SCNVector3(-point.y / 1000, -point.x / 1000, 0)
+    }
+    
+    func scaleMask(to scale: CGFloat) {
+        cam?.fieldOfView = 68 / scale
     }
     
 }

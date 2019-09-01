@@ -26,7 +26,7 @@ class Hue: NSObject, /*PHSBridgeConnectionObserver, PHSBridgeStateUpdateObserver
     
     var isWritingLight = false
     
-    let whiteList = ["Capsule"]
+    let whiteList = ["Control Center", "Central Station", "Windows XP"] //"Capsule"
     var allLights: [HMService]? {
         return home?.servicesWithTypes([HMServiceTypeLightbulb])
     }
@@ -66,10 +66,12 @@ class Hue: NSObject, /*PHSBridgeConnectionObserver, PHSBridgeStateUpdateObserver
     }
     
     func light(color: LiveColor, index: Int? = nil, done: (() -> ())? = nil) {
-
+        
+        print("light...")
+        
         guard let home = home else { return }
         
-        guard !isWritingLight else { return }
+//        guard !isWritingLight else { return }
         isWritingLight = true
         
         print("_________")

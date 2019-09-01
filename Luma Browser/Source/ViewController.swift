@@ -16,6 +16,14 @@ class ViewController: UIViewController, LumaBrowseViewDelegate {
 //    var oscServerButton: UIButton!
 //    var oscClientButton: UIButton!
     
+    var captureButton: UIButton!
+    
+    var captureState: CaptureState = .inactive {
+        didSet {
+            styleCapture()
+        }
+    }
+    
     var peer: Peer!
     var peerButton: UIButton!
     
@@ -72,24 +80,47 @@ class ViewController: UIViewController, LumaBrowseViewDelegate {
                 let alert = UIAlertController(title: "Ping", message: nil, preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
                 self.present(alert, animated: true, completion: nil)
+            } else if message.starts(with: "capture") {
+                guard let captureState = CaptureState(rawValue: message.replacingOccurrences(of: "capture:", with: "")) else { return }
+                self.captureState = captureState
             }
         }, gotImg: { image in
             print("peer img")
         }, peer: { state, info in
             print("peer state:", state, "- info:", info)
+            switch state {
+            case .dissconnected:
+                self.peerButton.tintColor = .darkGray
+            case .connecting:
+                self.peerButton.tintColor = .gray
+            case .connected:
+                self.peerButton.tintColor = .white
+            }
         }, disconnect: {
             print("peer disconnect")
+            self.peerButton.tintColor = .darkGray
             let alert = UIAlertController(title: "Peer Disconnect", message: nil, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
             self.present(alert, animated: true, completion: nil)
         })
         
         peerButton = UIButton(type: .system)
-        peerButton.tintColor = .white
+        peerButton.tintColor = .darkGray
         peerButton.addTarget(self, action: #selector(peerAction), for: .touchUpInside)
         peerButton.setTitle("IO", for: .normal)
         peerButton.titleLabel!.font = .systemFont(ofSize: 25, weight: .black)
         view.addSubview(peerButton)
+        
+        
+        captureButton = UIButton()
+        captureButton.addTarget(self, action: #selector(captureAction), for: .touchUpInside)
+        captureButton.addTarget(self, action: #selector(captureDown), for: .touchDown)
+        captureButton.addTarget(self, action: #selector(captureUp), for: .touchUpInside)
+        captureButton.addTarget(self, action: #selector(captureUp), for: .touchUpOutside)
+        captureButton.addTarget(self, action: #selector(captureUp), for: .touchCancel)
+        view.addSubview(captureButton)
+        styleCapture()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -112,6 +143,13 @@ class ViewController: UIViewController, LumaBrowseViewDelegate {
         peerButton.translatesAutoresizingMaskIntoConstraints = false
         peerButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         peerButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        
+        captureButton.layer.cornerRadius = 50
+        captureButton.translatesAutoresizingMaskIntoConstraints = false
+        captureButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        captureButton.bottomAnchor.constraint(equalTo: peerButton.topAnchor, constant: -10).isActive = true
+        captureButton.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        captureButton.heightAnchor.constraint(equalToConstant: 100).isActive = true
         
     }
     
@@ -164,6 +202,31 @@ class ViewController: UIViewController, LumaBrowseViewDelegate {
             view.addSubview(liveCamView)
         }
     }
+    
+    func styleCapture() {
+        captureButton.backgroundColor = captureState == .capture ? .red : captureState == .calibrate ? .white : .black
+        captureButton.layer.borderWidth = captureState == .inactive ? 5 : 0
+        captureButton.layer.borderColor = UIColor.white.cgColor
+    }
 
+    @objc func captureAction() {
+        if captureState == .inactive {
+            captureState = .calibrate
+        } else if captureState == .calibrate {
+            captureState = .capture
+        } else if captureState == .capture {
+            captureState = .inactive
+        }
+        peer.sendMsg("capture:\(captureState.rawValue)")
+    }
+
+    @objc func captureDown() {
+        captureButton.alpha = 0.5
+    }
+
+    @objc func captureUp() {
+        captureButton.alpha = 1.0
+    }
+    
 }
 

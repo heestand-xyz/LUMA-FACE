@@ -70,6 +70,28 @@ class ViewController: UIViewController, ARMirror, PixelDelegate, HueDelegate {
         return true
     }
     
+    
+    var captureButton: UIButton!
+    
+    var captureState: CaptureState = .inactive {
+        didSet {
+            styleCapture()
+            switch captureState {
+            case .inactive:
+                ar?.wireframeOn()
+                ar?.freeze = false
+            case .calibrate:
+                ar?.wireframeOff()
+                content.loadCalibration()
+                hue.light(color: .white)
+            case .capture:
+                content.loadLastImage()
+                ar?.freeze = true
+                hue.light(color: .black)
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         
         PixelKit.main.delegate = self
@@ -84,7 +106,7 @@ class ViewController: UIViewController, ARMirror, PixelDelegate, HueDelegate {
 //        luma = Luma(frame: view.bounds)
         
         if canAR {
-            ar = AR(frame: display == .projector ? airView.bounds : view.bounds)
+            ar = AR(frame: /*display == .projector ? airView.bounds : */view.bounds)
 //            face = Face(frame: view.bounds)
             content.delegate = ar
         } else {
@@ -99,11 +121,14 @@ class ViewController: UIViewController, ARMirror, PixelDelegate, HueDelegate {
         if canAR {
             ar!.mirrors = [self/*, luma*/]
 //            ar!.view.alpha = 0
+            view.addSubview(ar!.view)
             switch display {
             case .iPhone:
-                view.addSubview(ar!.view)
+                ar!.maskSceneView.layer.borderColor = UIColor.white.cgColor
+                ar!.maskSceneView.layer.borderWidth = 1
+                view.addSubview(ar!.maskSceneView)
             case .projector:
-                airView.addSubview(ar!.view)
+                airView.addSubview(ar!.maskSceneView)
             }
         } else {
             /*airView.*/view.addSubview(sim!.view)
@@ -241,23 +266,33 @@ class ViewController: UIViewController, ARMirror, PixelDelegate, HueDelegate {
                 let alert = UIAlertController(title: "Ping", message: nil, preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
                 self.present(alert, animated: true, completion: nil)
-            } else {
-                if message.starts(with: "index") {
-                    let index = Int(message.replacingOccurrences(of: "index:", with: "")) ?? 0
-                    if self.canAR {
-                        self.ar?.wireframeOff()
-                    } else {
-                        self.sim?.wireframeOff()
-                    }
-                    self.content.loadImageAt(index: index)
+            } else if message.starts(with: "index") {
+                let index = Int(message.replacingOccurrences(of: "index:", with: "")) ?? 0
+                if self.canAR {
+                    self.ar?.wireframeOff()
+                } else {
+                    self.sim?.wireframeOff()
                 }
+                self.content.loadImageAt(index: index)
+            } else if message.starts(with: "capture") {
+                guard let captureState = CaptureState(rawValue: message.replacingOccurrences(of: "capture:", with: "")) else { return }
+                self.captureState = captureState
             }
         }, gotImg: { image in
             print("peer img")
         }, peer: { state, info in
             print("peer state:", state, "- info:", info)
+            switch state {
+            case .dissconnected:
+                self.peerButton.tintColor = .darkGray
+            case .connecting:
+                self.peerButton.tintColor = .gray
+            case .connected:
+                self.peerButton.tintColor = .white
+            }
         }, disconnect: {
             print("peer disconnect")
+            self.peerButton.tintColor = .darkGray
             let alert = UIAlertController(title: "Peer Disconnect", message: nil, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
             self.present(alert, animated: true, completion: nil)
@@ -265,7 +300,7 @@ class ViewController: UIViewController, ARMirror, PixelDelegate, HueDelegate {
         peer.startHosting()
         
         peerButton = UIButton(type: .system)
-        peerButton.tintColor = .white
+        peerButton.tintColor = .darkGray
         peerButton.addTarget(self, action: #selector(peerAction), for: .touchUpInside)
         peerButton.setTitle("IO", for: .normal)
         peerButton.titleLabel!.font = .systemFont(ofSize: 25, weight: .black)
@@ -282,12 +317,33 @@ class ViewController: UIViewController, ARMirror, PixelDelegate, HueDelegate {
         hueButton.titleLabel!.font = .systemFont(ofSize: 25, weight: .black)
         view.addSubview(hueButton)
         
+        
+        captureButton = UIButton()
+        captureButton.addTarget(self, action: #selector(captureAction), for: .touchUpInside)
+        captureButton.addTarget(self, action: #selector(captureDown), for: .touchDown)
+        captureButton.addTarget(self, action: #selector(captureUp), for: .touchUpInside)
+        captureButton.addTarget(self, action: #selector(captureUp), for: .touchUpOutside)
+        captureButton.addTarget(self, action: #selector(captureUp), for: .touchCancel)
+        view.addSubview(captureButton)
+        styleCapture()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if canAR {
             ar!.run()
+            switch display {
+            case .iPhone:
+                ar!.maskSceneView.frame = CGRect(x: 0, y: 0, width: 100, height: 200)
+            case .projector:
+                ar!.maskSceneView.translatesAutoresizingMaskIntoConstraints = false
+                ar!.maskSceneView.centerXAnchor.constraint(equalTo: airView.centerXAnchor).isActive = true
+                ar!.maskSceneView.centerYAnchor.constraint(equalTo: airView.centerYAnchor).isActive = true
+                ar!.maskSceneView.widthAnchor.constraint(equalTo: airView.widthAnchor).isActive = true
+                ar!.maskSceneView.heightAnchor.constraint(equalTo: airView.heightAnchor).isActive = true
+
+            }
         }
         
         rBtn.translatesAutoresizingMaskIntoConstraints = false
@@ -344,6 +400,13 @@ class ViewController: UIViewController, ARMirror, PixelDelegate, HueDelegate {
         hueButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         hueButton.bottomAnchor.constraint(equalTo: peerButton.topAnchor, constant: -5).isActive = true
         
+        captureButton.layer.cornerRadius = 25
+        captureButton.translatesAutoresizingMaskIntoConstraints = false
+        captureButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        captureButton.bottomAnchor.constraint(equalTo: hueButton.topAnchor, constant: -10).isActive = true
+        captureButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        captureButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        
     }
     
 //    @objc func oscSetup() {
@@ -387,8 +450,39 @@ class ViewController: UIViewController, ARMirror, PixelDelegate, HueDelegate {
                 self.hue.light(color: .black) {}
             }
         }))
+        alert.addAction(UIAlertAction(title: "On", style: .default, handler: { _ in
+            self.hue.light(color: .white) {}
+        }))
+        alert.addAction(UIAlertAction(title: "Off", style: .default, handler: { _ in
+            self.hue.light(color: .black) {}
+        }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         self.present(alert, animated: true, completion: nil)
+    }
+    
+    func styleCapture() {
+        captureButton.backgroundColor = captureState == .capture ? .red : captureState == .calibrate ? .white : .black
+        captureButton.layer.borderWidth = captureState == .inactive ? 5 : 0
+        captureButton.layer.borderColor = UIColor.white.cgColor
+    }
+
+    @objc func captureAction() {
+        if captureState == .inactive {
+            captureState = .calibrate
+        } else if captureState == .calibrate {
+            captureState = .capture
+        } else if captureState == .capture {
+            captureState = .inactive
+        }
+        peer.sendMsg("capture:\(captureState.rawValue)")
+    }
+
+    @objc func captureDown() {
+        captureButton.alpha = 0.5
+    }
+
+    @objc func captureUp() {
+        captureButton.alpha = 1.0
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -546,10 +640,12 @@ class ViewController: UIViewController, ARMirror, PixelDelegate, HueDelegate {
     
     func moveMask() {
         if canAR {
-            let flip: CGFloat = flipped ? -1.0 : 1.0
-            ar!.view.transform = CGAffineTransform.identity
-                .translatedBy(x: position.x, y: position.y)
-                .scaledBy(x: zoom * flip, y: zoom)
+//            let flip: CGFloat = flipped ? -1.0 : 1.0
+//            ar!.view.transform = CGAffineTransform.identity
+//                .translatedBy(x: position.x, y: position.y)
+//                .scaledBy(x: zoom * flip, y: zoom)
+            ar!.moveMask(to: position)
+            ar!.scaleMask(to: zoom)
             indiBottomLeftView.backgroundColor = UIColor(white: 0.1, alpha: 1.0)
         }
     }
