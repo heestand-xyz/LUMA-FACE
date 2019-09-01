@@ -16,7 +16,6 @@ class FileLoader {
         var urls: [URL] = []
         for fileURL in fileURLs {
             if ["png", "jpg", "PNG", "JPG"].contains(fileURL.pathExtension) {
-                print("IMG:", fileURL)
                 urls.append(fileURL)
             }
         }
@@ -26,6 +25,7 @@ class FileLoader {
             guard let image = UIImage(data: data) else { continue }
             images.append(FileLoader.reFrame(image)!)
         }
+        print("IMGs:", images.count)
         return images
     }
     

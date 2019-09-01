@@ -88,6 +88,7 @@ class ViewController: UIViewController, LumaBrowseViewDelegate {
         peerButton.tintColor = .white
         peerButton.addTarget(self, action: #selector(peerAction), for: .touchUpInside)
         peerButton.setTitle("IO", for: .normal)
+        peerButton.titleLabel!.font = .systemFont(ofSize: 25, weight: .black)
         view.addSubview(peerButton)
     }
     
@@ -152,6 +153,7 @@ class ViewController: UIViewController, LumaBrowseViewDelegate {
     }
     
     func browsed(index: Int) {
+        peer.sendMsg("index:\(index)")
 //        LFOSCClient.main.send(index, to: "image-index")
     }
     

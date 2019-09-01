@@ -9,7 +9,9 @@
 import ARKit
 import PixelKit
 
-class ViewController: UIViewController, ARMirror, PixelDelegate {
+class ViewController: UIViewController, ARMirror, PixelDelegate, HueDelegate {
+    
+    var hue: Hue!
     
     var content: Content!
     
@@ -53,7 +55,9 @@ class ViewController: UIViewController, ARMirror, PixelDelegate {
     
     var peer: Peer!
     var peerButton: UIButton!
-    
+
+    var hueButton: UIButton!
+
     var canAR: Bool {
         return AR.isSupported
     }
@@ -237,6 +241,16 @@ class ViewController: UIViewController, ARMirror, PixelDelegate {
                 let alert = UIAlertController(title: "Ping", message: nil, preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
                 self.present(alert, animated: true, completion: nil)
+            } else {
+                if message.starts(with: "index") {
+                    let index = Int(message.replacingOccurrences(of: "index:", with: "")) ?? 0
+                    if self.canAR {
+                        self.ar?.wireframeOff()
+                    } else {
+                        self.sim?.wireframeOff()
+                    }
+                    self.content.loadImageAt(index: index)
+                }
             }
         }, gotImg: { image in
             print("peer img")
@@ -254,7 +268,19 @@ class ViewController: UIViewController, ARMirror, PixelDelegate {
         peerButton.tintColor = .white
         peerButton.addTarget(self, action: #selector(peerAction), for: .touchUpInside)
         peerButton.setTitle("IO", for: .normal)
+        peerButton.titleLabel!.font = .systemFont(ofSize: 25, weight: .black)
         view.addSubview(peerButton)
+        
+        
+        hue = Hue()
+        hue.delegate = self
+        
+        hueButton = UIButton(type: .system)
+        hueButton.tintColor = .white
+        hueButton.addTarget(self, action: #selector(hueAction), for: .touchUpInside)
+        hueButton.setTitle("Hue", for: .normal)
+        hueButton.titleLabel!.font = .systemFont(ofSize: 25, weight: .black)
+        view.addSubview(hueButton)
         
     }
     
@@ -309,10 +335,14 @@ class ViewController: UIViewController, ARMirror, PixelDelegate {
 //        oscClientButton.translatesAutoresizingMaskIntoConstraints = false
 //        oscClientButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
 //        oscClientButton.bottomAnchor.constraint(equalTo: oscServerButton.topAnchor, constant: -10).isActive = true
-
+        
         peerButton.translatesAutoresizingMaskIntoConstraints = false
         peerButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         peerButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        
+        hueButton.translatesAutoresizingMaskIntoConstraints = false
+        hueButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        hueButton.bottomAnchor.constraint(equalTo: peerButton.topAnchor, constant: -5).isActive = true
         
     }
     
@@ -345,6 +375,17 @@ class ViewController: UIViewController, ARMirror, PixelDelegate {
         let alert = UIAlertController(title: "IO", message: nil, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ping", style: .default, handler: { _ in
             self.peer.sendMsg("ping")
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+
+    @objc func hueAction() {
+        let alert = UIAlertController(title: "Hue", message: nil, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Blink", style: .default, handler: { _ in
+            self.hue.light(color: .white) {
+                self.hue.light(color: .black) {}
+            }
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         self.present(alert, animated: true, completion: nil)
@@ -540,6 +581,16 @@ class ViewController: UIViewController, ARMirror, PixelDelegate {
         guard battery != -1 else { return }
         indiTopRightView.backgroundColor = battery > 0.5 ? .white : UIColor(white: 0.1, alpha: 1.0)
         //        indiTopRightView.backgroundColor = UIColor(displayP3Red: 1 - max(0, battery * 2 - 1), green: min(1, battery * 2), blue: 0.0, alpha: 1.0)
+    }
+    
+    // MARK - HueDelegate
+    
+    func lightsWillChange(to color: LiveColor) {
+        
+    }
+    
+    func lightsDidChange(to color: LiveColor) {
+        
     }
     
 }
