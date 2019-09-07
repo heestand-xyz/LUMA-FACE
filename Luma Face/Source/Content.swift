@@ -18,18 +18,16 @@ class Content: PIXDelegate {
     
     var delegate: ContentDelegate?
 
-    let imagePix: ImagePIX
-//    let videoPix: VideoPIX
-//    let mediaPix: CrossPIX
-    let multPix: ColorPIX
-    let bgPix: ColorPIX
-    let finalPix: PIX
+//    let imagePix: ImagePIX
+//    let multPix: ColorPIX
+//    let bgPix: ColorPIX
+//    let finalPix: PIX
     
     var calibrationImage: UIImage!
     
     var imageIndex: Int = 0
     var image: UIImage {
-        return images[imageIndex]
+        return flip(image: images[imageIndex])!
     }
     var images: [UIImage]
     
@@ -46,24 +44,17 @@ class Content: PIXDelegate {
         
         images = FileLoader.getContentImages()
         
-        imagePix = ImagePIX()
-//        videoPix = VideoPIX()
-//        mediaPix = CrossPIX()
-//        mediaPix.fraction = 0.0
-//        mediaPix.inPixA = imagePix
-//        mediaPix.inPixB = videoPix
-        multPix = ColorPIX(res: ._2048)
-        bgPix = ColorPIX(res: ._2048)
-        bgPix.color = .black
-        finalPix = bgPix & (multPix * imagePix._flipY()._lumaToAlpha())
+//        imagePix = ImagePIX()
+//        multPix = ColorPIX(res: ._2048)
+//        bgPix = ColorPIX(res: ._2048)
+//        bgPix.color = .black
+//        finalPix = bgPix & (multPix * imagePix._flipY()._lumaToAlpha())
         
         loadNextImage()
-//        loadNextVideo()
-//        videoPix.pause()
 
-        finalPix.delegate = self
+//        finalPix.delegate = self
         
-        calibrationImage = flip(image: UIImage(named: "calibration")!)!
+        calibrationImage = UIImage(named: "calibration")!
         
     }
     
@@ -79,34 +70,31 @@ class Content: PIXDelegate {
     
     func loadImageAt(index: Int) {
         imageIndex = index
-        imagePix.image = image
+//        imagePix.image = image
+        delegate?.new(image: image)
     }
     
     func loadNextImage() {
-        imagePix.image = image
         imageIndex = (imageIndex + 1) % images.count
-//        mediaPix.fraction = 0.0
+//        imagePix.image = image
+        delegate?.new(image: image)
     }
     
     func loadExternal(image: UIImage) {
-        imagePix.image = image
-//        mediaPix.fraction = 0.0
+//        imagePix.image = image
+        delegate?.new(image: image)
     }
     
     func loadCalibration() {
-        imagePix.image = calibrationImage
+//        imagePix.image = calibrationImage
+//        mult(color: .blue)
+        delegate?.new(image: calibrationImage)
     }
     
     func loadLastImage() {
-        imagePix.image = image
+//        imagePix.image = image
+        delegate?.new(image: image)
     }
-    
-//    func loadNextVideo() {
-//        videoPix.load(url: video)
-//        videoPix.play()
-//        videoIndex = videoIndex + 1 % videos.count
-////        mediaPix.fraction = 1.0
-//    }
     
     func pixResChanged(_ pix: PIX, to res: PIX.Res) {}
     
@@ -118,11 +106,11 @@ class Content: PIXDelegate {
     }
     
     func mult(color: LiveColor) {
-        multPix.color = color
+//        multPix.color = color
     }
     
     func bg(color: LiveColor) {
-        bgPix.color = color
+//        bgPix.color = color
     }
     
 }

@@ -34,6 +34,7 @@
 		7457044621A9D30F007C3DB9 /* ViewAssistant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7457044521A9D30F007C3DB9 /* ViewAssistant.swift */; };
 		7457044821AACAF1007C3DB9 /* 3D.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 7457044721AACAF1007C3DB9 /* 3D.scnassets */; };
 		7457044A21AACB24007C3DB9 /* Sim.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7457044921AACB24007C3DB9 /* Sim.swift */; };
+		746B7FE12323D5540043A20C /* TransformView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746B7FE02323D5540043A20C /* TransformView.swift */; };
 		748922A7231989F60015DE35 /* Peer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748922A6231989F60015DE35 /* Peer.swift */; };
 		748922A8231989F60015DE35 /* Peer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748922A6231989F60015DE35 /* Peer.swift */; };
 		748F67E922C8E74C003A64A9 /* FileLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748F67E822C8E74C003A64A9 /* FileLoader.swift */; };
@@ -130,6 +131,7 @@
 		7457044521A9D30F007C3DB9 /* ViewAssistant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewAssistant.swift; sourceTree = "<group>"; };
 		7457044721AACAF1007C3DB9 /* 3D.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = 3D.scnassets; sourceTree = "<group>"; };
 		7457044921AACB24007C3DB9 /* Sim.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sim.swift; sourceTree = "<group>"; };
+		746B7FE02323D5540043A20C /* TransformView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformView.swift; sourceTree = "<group>"; };
 		748922A6231989F60015DE35 /* Peer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Peer.swift; sourceTree = "<group>"; };
 		748F67E822C8E74C003A64A9 /* FileLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileLoader.swift; sourceTree = "<group>"; };
 		748F67ED22C8E8EB003A64A9 /* LFOSCServer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LFOSCServer.swift; sourceTree = "<group>"; };
@@ -219,6 +221,7 @@
 				7411B51D22A1920300F861BD /* ViewController.swift */,
 				7411B52E22A1926100F861BD /* LumaBrowseView.swift */,
 				7429DDB322FD712000ED472D /* LiveCamView.swift */,
+				746B7FE02323D5540043A20C /* TransformView.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -638,6 +641,7 @@
 				7429DDB522FD712000ED472D /* LiveCamView.swift in Sources */,
 				7411B51E22A1920300F861BD /* ViewController.swift in Sources */,
 				7429DDB222FD6D2C00ED472D /* LFOSCClient.swift in Sources */,
+				746B7FE12323D5540043A20C /* TransformView.swift in Sources */,
 				74CF071B22C93F9D00FBEEDF /* LFIP.swift in Sources */,
 				7411B51C22A1920300F861BD /* AppDelegate.swift in Sources */,
 				74976A25231BFA7A0045CEA0 /* Capture.swift in Sources */,

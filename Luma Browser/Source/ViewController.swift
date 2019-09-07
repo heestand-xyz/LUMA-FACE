@@ -8,10 +8,11 @@
 
 import UIKit
 
-class ViewController: UIViewController, LumaBrowseViewDelegate {
+class ViewController: UIViewController, LumaBrowseViewDelegate, TransformDelegate {
     
     var lumaBrowseView: LumaBrowseView!
-    var liveCamView: LiveCamView!
+//    var liveCamView: LiveCamView!
+    var transformView: TransformView!
     
 //    var oscServerButton: UIButton!
 //    var oscClientButton: UIButton!
@@ -38,7 +39,12 @@ class ViewController: UIViewController, LumaBrowseViewDelegate {
         lumaBrowseView.delegate = self
         view.addSubview(lumaBrowseView)
         
-        liveCamView = LiveCamView(frame: view.bounds)
+        transformView = TransformView()
+        transformView.delegate = self
+        transformView.isHidden = true
+        view.addSubview(transformView)
+        
+//        liveCamView = LiveCamView(frame: view.bounds)
         
         
 //        LFOSCServer.main.port = 7777
@@ -69,10 +75,10 @@ class ViewController: UIViewController, LumaBrowseViewDelegate {
 //        oscClientButton.addTarget(self, action: #selector(oscSetup), for: .touchUpInside)
 //        oscClientButton.setTitle("Client: \(remote_ip):\(remote_port)", for: .normal)
 //        view.addSubview(oscClientButton)
-//
-//        let tap = UITapGestureRecognizer(target: self, action: #selector(liveCamToggle))
-//        tap.numberOfTapsRequired = 2
-//        view.addGestureRecognizer(tap)
+
+        let tap = UITapGestureRecognizer(target: self, action: #selector(transformToggle))
+        tap.numberOfTapsRequired = 2
+        view.addGestureRecognizer(tap)
         
         peer = Peer(gotMsg: { message in
             print("peer msg:", message)
@@ -124,6 +130,12 @@ class ViewController: UIViewController, LumaBrowseViewDelegate {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        
+        transformView.translatesAutoresizingMaskIntoConstraints = false
+        transformView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        transformView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        transformView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        transformView.heightAnchor.constraint(equalTo: view.heightAnchor).isActive = true
         
         lumaBrowseView.translatesAutoresizingMaskIntoConstraints = false
         lumaBrowseView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
@@ -195,18 +207,29 @@ class ViewController: UIViewController, LumaBrowseViewDelegate {
 //        LFOSCClient.main.send(index, to: "image-index")
     }
     
-    @objc func liveCamToggle() {
-        if liveCamView.superview != nil {
-            liveCamView.removeFromSuperview()
-        } else {
-            view.addSubview(liveCamView)
-        }
+    @objc func transformToggle() {
+        transformView.isHidden = !transformView.isHidden
     }
+    
+//    @objc func liveCamToggle() {
+//        if liveCamView.superview != nil {
+//            liveCamView.removeFromSuperview()
+//        } else {
+//            let alert = UIAlertController(title: "Live Cam", message: nil, preferredStyle: .alert)
+//            alert.addAction(UIAlertAction(title: "Open", style: .default, handler: { _ in
+//                view.addSubview(liveCamView)
+//            }))
+//            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+//            self.present(alert, animated: true, completion: nil)
+//        }
+//    }
     
     func styleCapture() {
         captureButton.backgroundColor = captureState == .capture ? .red : captureState == .calibrate ? .white : .black
         captureButton.layer.borderWidth = captureState == .inactive ? 5 : 0
         captureButton.layer.borderColor = UIColor.white.cgColor
+        lumaBrowseView.isUserInteractionEnabled = captureState == .inactive
+        lumaBrowseView.alpha = captureState == .inactive ? 1.0 : 0.5
     }
 
     @objc func captureAction() {
@@ -226,6 +249,12 @@ class ViewController: UIViewController, LumaBrowseViewDelegate {
 
     @objc func captureUp() {
         captureButton.alpha = 1.0
+    }
+    
+    // MARK - TransformDelegate
+    
+    func transform(position: CGPoint, zoom: CGFloat) {
+        peer.sendMsg("transform:\(position.x),\(position.y),\(zoom)")
     }
     
 }

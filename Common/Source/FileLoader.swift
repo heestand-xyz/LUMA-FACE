@@ -21,6 +21,7 @@ class FileLoader {
         }
         var images: [UIImage] = []
         for url in urls {
+            guard !url.path.contains("AppIcon") else { continue }
             guard let data = try? Data(contentsOf: url) else { continue }
             guard let image = UIImage(data: data) else { continue }
             images.append(FileLoader.reFrame(image)!)

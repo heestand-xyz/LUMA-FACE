@@ -88,6 +88,9 @@ class ViewController: UIViewController, ARMirror, PixelDelegate, HueDelegate {
                 content.loadLastImage()
                 ar?.freeze = true
                 hue.light(color: .black)
+                RunLoop.current.add(Timer(timeInterval: 0.5, repeats: false, block: { _ in
+                    self.content.loadLastImage()
+                }), forMode: .common)
             }
         }
     }
@@ -143,9 +146,9 @@ class ViewController: UIViewController, ARMirror, PixelDelegate, HueDelegate {
         let pinch = UIPinchGestureRecognizer(target: self, action: #selector(zoomFaceMask))
         view.addGestureRecognizer(pinch)
         
-        let doubleTap = UITapGestureRecognizer(target: self, action: #selector(flipFaceMask))
-        doubleTap.numberOfTapsRequired = 2
-        view.addGestureRecognizer(doubleTap)
+//        let doubleTap = UITapGestureRecognizer(target: self, action: #selector(flipFaceMask))
+//        doubleTap.numberOfTapsRequired = 2
+//        view.addGestureRecognizer(doubleTap)
         
         let pan = UIPanGestureRecognizer(target: self, action: #selector(moveFaceMask))
         view.addGestureRecognizer(pan)
@@ -277,6 +280,14 @@ class ViewController: UIViewController, ARMirror, PixelDelegate, HueDelegate {
             } else if message.starts(with: "capture") {
                 guard let captureState = CaptureState(rawValue: message.replacingOccurrences(of: "capture:", with: "")) else { return }
                 self.captureState = captureState
+            } else if message.starts(with: "transform") {
+                let transform = message.replacingOccurrences(of: "transform:", with: "").split(separator: ",")
+                let x = CGFloat(Double(transform[0]) ?? 0.0)
+                let y = CGFloat(Double(transform[1]) ?? 0.0)
+                let s = CGFloat(Double(transform[2]) ?? 1.0)
+                self.position = CGPoint(x: x, y: y)
+                self.zoom = s
+                self.moveMask()
             }
         }, gotImg: { image in
             print("peer img")
@@ -289,6 +300,7 @@ class ViewController: UIViewController, ARMirror, PixelDelegate, HueDelegate {
                 self.peerButton.tintColor = .gray
             case .connected:
                 self.peerButton.tintColor = .white
+                self.peer.sendMsg("capture:\(self.captureState.rawValue)")
             }
         }, disconnect: {
             print("peer disconnect")
@@ -618,10 +630,10 @@ class ViewController: UIViewController, ARMirror, PixelDelegate, HueDelegate {
         moveMask()
     }
     
-    @objc func flipFaceMask(tap: UITapGestureRecognizer) {
-        flipped = !flipped
-        moveMask()
-    }
+//    @objc func flipFaceMask(tap: UITapGestureRecognizer) {
+//        flipped = !flipped
+//        moveMask()
+//    }
     
     @objc func moveFaceMask(pan: UIPanGestureRecognizer) {
         switch pan.state {

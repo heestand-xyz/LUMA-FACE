@@ -159,8 +159,11 @@ class AR: NSObject, ARSessionDelegate, ARSCNViewDelegate, ContentDelegate {
         node?.geometry!.firstMaterial!.diffuse.contents = texture
     }
     func new(image: UIImage) {
-//        node!.geometry!.firstMaterial!.fillMode = .fill
-//        node?.geometry!.firstMaterial!.diffuse.contents = image
+        guard !wireframe else { return }
+        maskNode?.geometry!.firstMaterial!.fillMode = .fill
+        maskNode?.geometry!.firstMaterial!.diffuse.contents = image
+        node?.geometry!.firstMaterial!.fillMode = .fill
+        node?.geometry!.firstMaterial!.diffuse.contents = image
     }
     
     func wireframeOn() {
