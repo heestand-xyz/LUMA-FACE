@@ -12,4 +12,5 @@ enum CaptureState: String {
     case inactive
     case calibrate
     case capture
+    case live
 }

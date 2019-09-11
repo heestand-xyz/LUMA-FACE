@@ -54,7 +54,7 @@ class Content: PIXDelegate {
 
 //        finalPix.delegate = self
         
-        calibrationImage = UIImage(named: "calibration")!
+        calibrationImage = UIImage(named: "calibration_blue")!
         
     }
     

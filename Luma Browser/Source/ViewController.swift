@@ -25,6 +25,14 @@ class ViewController: UIViewController, LumaBrowseViewDelegate, TransformDelegat
         }
     }
     
+    var lumaGateButton: UIButton!
+    
+    var lumaGate: Bool = false {
+        didSet {
+            styleLumaGate()
+        }
+    }
+    
     var peer: Peer!
     var peerButton: UIButton!
     
@@ -89,6 +97,9 @@ class ViewController: UIViewController, LumaBrowseViewDelegate, TransformDelegat
             } else if message.starts(with: "capture") {
                 guard let captureState = CaptureState(rawValue: message.replacingOccurrences(of: "capture:", with: "")) else { return }
                 self.captureState = captureState
+            } else if message.starts(with: "luma-gate") {
+                let lumaGate = Int(message.replacingOccurrences(of: "luma-gate:", with: "")) == 1
+                self.lumaGate = lumaGate
             }
         }, gotImg: { image in
             print("peer img")
@@ -125,7 +136,19 @@ class ViewController: UIViewController, LumaBrowseViewDelegate, TransformDelegat
         captureButton.addTarget(self, action: #selector(captureUp), for: .touchUpOutside)
         captureButton.addTarget(self, action: #selector(captureUp), for: .touchCancel)
         view.addSubview(captureButton)
+        
         styleCapture()
+        
+        
+        lumaGateButton = UIButton()
+        lumaGateButton.addTarget(self, action: #selector(lumaGateAction), for: .touchUpInside)
+        lumaGateButton.addTarget(self, action: #selector(lumaGateDown), for: .touchDown)
+        lumaGateButton.addTarget(self, action: #selector(lumaGateUp), for: .touchUpInside)
+        lumaGateButton.addTarget(self, action: #selector(lumaGateUp), for: .touchUpOutside)
+        lumaGateButton.addTarget(self, action: #selector(lumaGateUp), for: .touchCancel)
+        view.addSubview(lumaGateButton)
+                
+        styleLumaGate()
         
     }
     
@@ -162,6 +185,14 @@ class ViewController: UIViewController, LumaBrowseViewDelegate, TransformDelegat
         captureButton.bottomAnchor.constraint(equalTo: peerButton.topAnchor, constant: -10).isActive = true
         captureButton.widthAnchor.constraint(equalToConstant: 100).isActive = true
         captureButton.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        
+        
+        lumaGateButton.layer.cornerRadius = 25
+        lumaGateButton.translatesAutoresizingMaskIntoConstraints = false
+        lumaGateButton.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        lumaGateButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        lumaGateButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        lumaGateButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
     }
     
@@ -225,11 +256,11 @@ class ViewController: UIViewController, LumaBrowseViewDelegate, TransformDelegat
 //    }
     
     func styleCapture() {
-        captureButton.backgroundColor = captureState == .capture ? .red : captureState == .calibrate ? .white : .black
+        captureButton.backgroundColor = captureState == .capture ? .red : captureState == .calibrate ? .blue : captureState == .live ? .white : .black
         captureButton.layer.borderWidth = captureState == .inactive ? 5 : 0
         captureButton.layer.borderColor = UIColor.white.cgColor
-        lumaBrowseView.isUserInteractionEnabled = captureState == .inactive
-        lumaBrowseView.alpha = captureState == .inactive ? 1.0 : 0.5
+        lumaBrowseView.isUserInteractionEnabled = captureState != .calibrate
+        lumaBrowseView.alpha = captureState != .calibrate ? 1.0 : 0.5
     }
 
     @objc func captureAction() {
@@ -238,6 +269,8 @@ class ViewController: UIViewController, LumaBrowseViewDelegate, TransformDelegat
         } else if captureState == .calibrate {
             captureState = .capture
         } else if captureState == .capture {
+            captureState = .live
+        } else if captureState == .live {
             captureState = .inactive
         }
         peer.sendMsg("capture:\(captureState.rawValue)")
@@ -250,6 +283,24 @@ class ViewController: UIViewController, LumaBrowseViewDelegate, TransformDelegat
     @objc func captureUp() {
         captureButton.alpha = 1.0
     }
+    
+    func styleLumaGate() {
+        lumaGateButton.backgroundColor = lumaGate ? .green : .darkGray
+    }
+
+    @objc func lumaGateAction() {
+        lumaGate.toggle()
+        peer.sendMsg("luma-gate:\(lumaGate ? 1 : 0)")
+    }
+
+    @objc func lumaGateDown() {
+        lumaGateButton.alpha = 0.5
+    }
+
+    @objc func lumaGateUp() {
+        lumaGateButton.alpha = 1.0
+    }
+    
     
     // MARK - TransformDelegate
     

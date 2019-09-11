@@ -25,7 +25,7 @@ class ViewController: UIViewController, ARMirror, PixelDelegate, HueDelegate {
         case iPhone
         case projector
     }
-    let display: Display = .iPhone
+    let display: Display = .projector
     
     var flipped: Bool = false
     var zoom: CGFloat = 1.0
@@ -79,7 +79,6 @@ class ViewController: UIViewController, ARMirror, PixelDelegate, HueDelegate {
             switch captureState {
             case .inactive:
                 ar?.wireframeOn()
-                ar?.freeze = false
             case .calibrate:
                 ar?.wireframeOff()
                 content.loadCalibration()
@@ -91,7 +90,19 @@ class ViewController: UIViewController, ARMirror, PixelDelegate, HueDelegate {
                 RunLoop.current.add(Timer(timeInterval: 0.5, repeats: false, block: { _ in
                     self.content.loadLastImage()
                 }), forMode: .common)
+            case .live:
+                ar?.freeze = false
             }
+        }
+    }
+    
+    
+    var lumaGateButton: UIButton!
+    var lumaGateView: UIView!
+    
+    var lumaGate: Bool = false {
+        didSet {
+            styleLumaGate()
         }
     }
     
@@ -288,6 +299,9 @@ class ViewController: UIViewController, ARMirror, PixelDelegate, HueDelegate {
                 self.position = CGPoint(x: x, y: y)
                 self.zoom = s
                 self.moveMask()
+            } else if message.starts(with: "luma-gate") {
+                let lumaGate = Int(message.replacingOccurrences(of: "luma-gate:", with: "")) == 1
+                self.lumaGate = lumaGate
             }
         }, gotImg: { image in
             print("peer img")
@@ -301,6 +315,7 @@ class ViewController: UIViewController, ARMirror, PixelDelegate, HueDelegate {
             case .connected:
                 self.peerButton.tintColor = .white
                 self.peer.sendMsg("capture:\(self.captureState.rawValue)")
+                self.peer.sendMsg("luma-gate:\(self.lumaGate ? 1 : 0)")
             }
         }, disconnect: {
             print("peer disconnect")
@@ -337,7 +352,22 @@ class ViewController: UIViewController, ARMirror, PixelDelegate, HueDelegate {
         captureButton.addTarget(self, action: #selector(captureUp), for: .touchUpOutside)
         captureButton.addTarget(self, action: #selector(captureUp), for: .touchCancel)
         view.addSubview(captureButton)
+        
         styleCapture()
+        
+        
+        lumaGateButton = UIButton()
+        lumaGateButton.addTarget(self, action: #selector(lumaGateAction), for: .touchUpInside)
+        lumaGateButton.addTarget(self, action: #selector(lumaGateDown), for: .touchDown)
+        lumaGateButton.addTarget(self, action: #selector(lumaGateUp), for: .touchUpInside)
+        lumaGateButton.addTarget(self, action: #selector(lumaGateUp), for: .touchUpOutside)
+        lumaGateButton.addTarget(self, action: #selector(lumaGateUp), for: .touchCancel)
+        view.addSubview(lumaGateButton)
+        
+        lumaGateView = UIView()
+        ar!.maskSceneView.addSubview(lumaGateView)
+        
+        styleLumaGate()
         
     }
     
@@ -412,12 +442,26 @@ class ViewController: UIViewController, ARMirror, PixelDelegate, HueDelegate {
         hueButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         hueButton.bottomAnchor.constraint(equalTo: peerButton.topAnchor, constant: -5).isActive = true
         
-        captureButton.layer.cornerRadius = 25
+        captureButton.layer.cornerRadius = 50
         captureButton.translatesAutoresizingMaskIntoConstraints = false
         captureButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         captureButton.bottomAnchor.constraint(equalTo: hueButton.topAnchor, constant: -10).isActive = true
-        captureButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
-        captureButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        captureButton.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        captureButton.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        
+        
+        lumaGateButton.layer.cornerRadius = 25
+        lumaGateButton.translatesAutoresizingMaskIntoConstraints = false
+        lumaGateButton.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        lumaGateButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        lumaGateButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        lumaGateButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        
+        lumaGateView.translatesAutoresizingMaskIntoConstraints = false
+        lumaGateView.centerXAnchor.constraint(equalTo: ar!.maskSceneView.centerXAnchor).isActive = true
+        lumaGateView.centerYAnchor.constraint(equalTo: ar!.maskSceneView.centerYAnchor).isActive = true
+        lumaGateView.widthAnchor.constraint(equalTo: ar!.maskSceneView.widthAnchor).isActive = true
+        lumaGateView.heightAnchor.constraint(equalTo: ar!.maskSceneView.heightAnchor).isActive = true
         
     }
     
@@ -473,7 +517,7 @@ class ViewController: UIViewController, ARMirror, PixelDelegate, HueDelegate {
     }
     
     func styleCapture() {
-        captureButton.backgroundColor = captureState == .capture ? .red : captureState == .calibrate ? .white : .black
+        captureButton.backgroundColor = captureState == .capture ? .red : captureState == .calibrate ? .blue : captureState == .live ? .white : .black
         captureButton.layer.borderWidth = captureState == .inactive ? 5 : 0
         captureButton.layer.borderColor = UIColor.white.cgColor
     }
@@ -484,6 +528,8 @@ class ViewController: UIViewController, ARMirror, PixelDelegate, HueDelegate {
         } else if captureState == .calibrate {
             captureState = .capture
         } else if captureState == .capture {
+            captureState = .live
+        } else if captureState == .live {
             captureState = .inactive
         }
         peer.sendMsg("capture:\(captureState.rawValue)")
@@ -495,6 +541,24 @@ class ViewController: UIViewController, ARMirror, PixelDelegate, HueDelegate {
 
     @objc func captureUp() {
         captureButton.alpha = 1.0
+    }
+    
+    func styleLumaGate() {
+        lumaGateButton.backgroundColor = lumaGate ? .green : .darkGray
+        lumaGateView.backgroundColor = lumaGate ? .clear : .black
+    }
+
+    @objc func lumaGateAction() {
+        lumaGate.toggle()
+        peer.sendMsg("luma-gate:\(lumaGate ? 1 : 0)")
+    }
+
+    @objc func lumaGateDown() {
+        lumaGateButton.alpha = 0.5
+    }
+
+    @objc func lumaGateUp() {
+        lumaGateButton.alpha = 1.0
     }
     
     override func viewWillDisappear(_ animated: Bool) {
