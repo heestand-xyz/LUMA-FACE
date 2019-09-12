@@ -41,7 +41,7 @@ class ViewController: UIViewController, ARMirror, PixelDelegate, HueDelegate {
     var fpsLabel: UILabel!
     
     var airView: UIView!
-    var airPlayPIX: AirPlayPIX!
+    var airPlay: AirPlay!
     
     var rBtn: UIButton!
     var gBtn: UIButton!
@@ -231,12 +231,8 @@ class ViewController: UIViewController, ARMirror, PixelDelegate, HueDelegate {
         
         indiMaskReset()
         
-        let bgPix = ColorPIX(res: ._1080p)
-        bgPix.color = .black
-        
-        airPlayPIX = AirPlayPIX()
-        airPlayPIX.inPix = bgPix
-        airPlayPIX.view.addSubview(airView)
+        airPlay = AirPlay()
+        airPlay.view.addSubview(airView)
         
         
 //        let local_ip = LFIP.getAddress()
@@ -436,7 +432,7 @@ class ViewController: UIViewController, ARMirror, PixelDelegate, HueDelegate {
         
         peerButton.translatesAutoresizingMaskIntoConstraints = false
         peerButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        peerButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        peerButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -100).isActive = true
         
         hueButton.translatesAutoresizingMaskIntoConstraints = false
         hueButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
@@ -546,6 +542,8 @@ class ViewController: UIViewController, ARMirror, PixelDelegate, HueDelegate {
     func styleLumaGate() {
         lumaGateButton.backgroundColor = lumaGate ? .green : .darkGray
         lumaGateView.backgroundColor = lumaGate ? .clear : .black
+        lumaGateView.layer.borderWidth = lumaGate ? 0.0 : 1.0
+        lumaGateView.layer.borderColor = UIColor.white.cgColor
     }
 
     @objc func lumaGateAction() {
