@@ -1,6 +1,6 @@
 # LUMA FACE
 
-[Photos](http://hexagons.se/luma-face/)
+Photos avalible [here](http://hexagons.se/luma-face/).
 
 Powered by [PixelKit](https://github.com/hexagons/pixelkit)
 
