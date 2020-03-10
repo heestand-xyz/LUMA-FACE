@@ -5,7 +5,7 @@ target 'Luma Browser' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
 
-  pod 'PixelKit', :path => '~/All-Code/All-of-PixelKit/PixelKit'
+  pod 'PixelKit', '~> 0.7.0'
   pod 'OSCKit'
 
 end
@@ -14,7 +14,7 @@ target 'Luma Face' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
 
-  pod 'PixelKit', :path => '~/All-Code/All-of-PixelKit/PixelKit'
+  pod 'PixelKit', '~> 0.7.0'
   pod 'OSCKit'
 
 end
