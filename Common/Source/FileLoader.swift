@@ -20,7 +20,9 @@ class FileLoader {
             }
         }
         var images: [UIImage] = []
-        for url in urls {
+        for url in urls.sorted(by: { urlA, urlB -> Bool in
+            urlA.lastPathComponent < urlB.lastPathComponent
+        }) {
             guard !url.path.contains("AppIcon") else { continue }
             guard let data = try? Data(contentsOf: url) else { continue }
             guard let image = UIImage(data: data) else { continue }
